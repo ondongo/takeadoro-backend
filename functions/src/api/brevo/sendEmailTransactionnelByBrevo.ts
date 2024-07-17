@@ -1,4 +1,4 @@
-import { initializeBrevoClient } from "../utils/brevoUtils";
+import { initializeBrevoClient } from "../../utils/brevoUtils";
 
 var SibApiV3Sdk = require("sib-api-v3-sdk");
 import { v4 as uuidv4 } from "uuid";
