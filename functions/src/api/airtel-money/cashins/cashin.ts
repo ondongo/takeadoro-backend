@@ -1,5 +1,5 @@
-
-async function performCashIn(
+export async function initiateAirtelDeposit(
+  airtelSimNumber: any,
   amount: any,
   beneficiaryId: any,
   accessToken: any
