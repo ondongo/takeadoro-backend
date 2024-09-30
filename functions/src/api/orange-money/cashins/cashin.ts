@@ -1,3 +1,4 @@
+import { encryptPassword } from "../../../utils/encryptPassword";
 import { obtainAccessToken } from "../../../utils/obtainToken";
 
 export async function makeCashInRequest(
@@ -13,12 +14,13 @@ export async function makeCashInRequest(
     return { success: false, message: "Access token missing" };
   }
 
+  const encryptedRsaPinCode = await encryptPassword("2021", accessToken);
+  console.log("GOOGOOGOGOG", encryptedRsaPinCode);
   const payload: any = {
     partner: {
       idType: "MSISDN",
       id: partnerMsisdn,
-      encryptedPinCode:
-        "JYB6uyRwG2ZaOAiLFckPaheyGzCpw5nBqBFCEWNB/wdT9zgoDEfJlmf8Ihf+ydAdIVTokMWbuF4vNcFqLC/MjGZT/o69sateWSCd9CypNvXrDV5XlUijEPwGEFTcPq4EG1LwosMZiXWchyfL+TsJHFMN8nYv+e7v/y0RLoS8u5hH8GSTjjZDIZORlPLBYV/ePb+W73jZ12fzdcteIwXEw+6Tg7LmRMK8rpCEoUVZfMc+gA9C+26uAyan2O06oItojHSit1ITkLD1tCoPmE+H+1xIumrczVF32XQxy3HogdQGvxvWdO8N0E29DWw/8n9ryMBpb6GzbBoX4sb0Kif6Gw==",
+      encryptedPinCode: encryptedRsaPinCode,
     },
     customer: {
       idType: "MSISDN",
@@ -32,6 +34,8 @@ export async function makeCashInRequest(
     receiveNotification: false,
   };
 
+  console.log("Payload envoyé:", JSON.stringify(payload, null, 2));
+
   try {
     const response = await fetch(
       "https://api.sandbox.orange-sonatel.com/api/eWallet/v1/cashins",
@@ -39,7 +43,7 @@ export async function makeCashInRequest(
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Accept": "*/*", 
+          Accept: "*/*",
           Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify(payload),

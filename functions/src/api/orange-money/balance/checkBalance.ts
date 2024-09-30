@@ -1,3 +1,4 @@
+import { encryptPassword } from "../../../utils/encryptPassword";
 import { obtainAccessToken } from "../../../utils/obtainToken";
 
 export async function checkBalance(
@@ -13,6 +14,10 @@ export async function checkBalance(
     return { success: false, message: "Access token missing" };
   }
 
+  const encryptedRsaPinCode = await encryptPassword(
+    encryptedPinCode,
+    accessToken
+  );
   try {
     const response = await fetch(
       "https://api.sandbox.orange-sonatel.com/api/eWallet/v1/account/retailer/balance",

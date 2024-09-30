@@ -11,6 +11,7 @@ import { onRequest } from "firebase-functions/v2/https";
 import * as logger from "firebase-functions/logger";
 import { makeCashInRequest } from "./api/orange-money/cashins/cashin";
 import { checkBalance } from "./api/orange-money/balance/checkBalance";
+import { createInvoiceRequest } from "./api/paydunya/send-money";
 
 // Start writing functions
 // https://firebase.google.com/docs/functions/typescript
@@ -19,6 +20,17 @@ import { checkBalance } from "./api/orange-money/balance/checkBalance";
 //   logger.info("Hello logs!", {structuredData: true});
 //   response.send("Hello from Firebase!");
 // });
+
+export const httpCreateInvoice = onRequest(async (req, res) => {
+  try {
+    const body = req.body;
+    const response = await createInvoiceRequest(body);
+    res.status(response.success ? 200 : 500).json(response);
+  } catch (err) {
+    console.error("Server error:", err);
+    res.status(500).json({ error: true, message: "Server error" });
+  }
+});
 
 export const cashInOrange = onRequest(async (req: any, res: any) => {
   try {
