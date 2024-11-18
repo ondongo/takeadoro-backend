@@ -32,7 +32,16 @@ export const httpCreateInvoice = onRequest(async (req, res) => {
   }
 });
 
-export const cashInOrange = onRequest(async (req: any, res: any) => {
+
+
+
+
+
+
+
+
+
+/* export const cashInOrange = onRequest(async (req: any, res: any) => {
   try {
     const { partnerMsisdn, amount, customerMsisdn } = req.body;
 
@@ -63,9 +72,9 @@ export const cashInOrange = onRequest(async (req: any, res: any) => {
     console.error("Error handling cash-in request:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
-});
+}); */
 
-export const checkBalanceOrange = onRequest(async (req: any, res: any) => {
+/* export const checkBalanceOrange = onRequest(async (req: any, res: any) => {
   // Vérifiez que la méthode de la requête est POST
   if (req.method !== "POST") {
     return res.status(405).json({
@@ -97,3 +106,4 @@ export const checkBalanceOrange = onRequest(async (req: any, res: any) => {
       .json({ success: false, message: "Internal Server Error", error: error });
   }
 });
+ */
