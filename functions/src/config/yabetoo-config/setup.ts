@@ -6,4 +6,4 @@ const setupYabetoo = {
     mode:`${process.env.PAYDUNYA_MODE}`
   };
   
-  export default setupPaydunya;
+  export default setupYabetoo;
