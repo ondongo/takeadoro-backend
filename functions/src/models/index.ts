@@ -28,3 +28,9 @@ interface User {
     error?: boolean;
     message?: string;
   }
+
+export interface InvoiceResponseStruct {
+    success: boolean;
+    message: string;
+    response?: any;
+  }

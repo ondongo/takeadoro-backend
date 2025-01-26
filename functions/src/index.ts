@@ -8,9 +8,9 @@
  */
 
 import { onRequest } from "firebase-functions/v2/https";
-import * as logger from "firebase-functions/logger";
+/* import * as logger from "firebase-functions/logger";
 import { makeCashInRequest } from "./api/orange-money/cashins/cashin";
-import { checkBalance } from "./api/orange-money/balance/checkBalance";
+import { checkBalance } from "./api/orange-money/balance/checkBalance"; */
 import { createInvoiceRequest } from "./api/paydunya/send-money";
 
 // Start writing functions
@@ -21,7 +21,7 @@ import { createInvoiceRequest } from "./api/paydunya/send-money";
 //   response.send("Hello from Firebase!");
 // });
 
-export const httpCreateInvoice = onRequest(async (req, res) => {
+export const httpCreateInvoice = onRequest(async (req:any, res:any) => {
   try {
     const body = req.body;
     const response = await createInvoiceRequest(body);

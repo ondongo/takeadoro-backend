@@ -1,3 +1,4 @@
+import { handleInvoicePaymentSucceeded } from "./handlers/invoicePaymentSucceeded";
 
 export async function POST(req: Request) {
   try {
@@ -7,10 +8,10 @@ export async function POST(req: Request) {
 
     console.log("data callback", data);
     const uid = data.custom_data.uid;
-   /*  const user = await adminAuth.getUser(uid); */
+    //const user = await adminAuth.getUser(uid); 
    // console.log(data)
     if (data.status === "completed") {
-      //handleInvoicePaymentSucceeded(data);
+      handleInvoicePaymentSucceeded(data);
     }
 
     return new Response("Notification successfully received.", {

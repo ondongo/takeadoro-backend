@@ -1,9 +1,8 @@
-/* import admin from "../../../../config/firebaseConfig";
+import admin from "../../../../config/firebaseConfig";
 
 if (admin.apps.length === 0) {
   admin.initializeApp();
 }
-
 
 
 const db = admin.firestore();
@@ -23,7 +22,7 @@ export async function handleInvoicePaymentSucceeded(data: any) {
     invoiceToken
   );
 
-  handleSuccessfulSubscriptionPayment(uid, customData, amount, paymentId);
+  //handleSuccessfulSubscriptionPayment(uid, customData, amount, paymentId);
 }
 async function addPayment(
   paymentMethod: string,
@@ -32,10 +31,9 @@ async function addPayment(
   currency: string,
   invoiceToken: string
 ) {
-
-  var collectionRef =  await db.collection(db, "payments");
+  var collectionRef = db.collection("payments");
   try {
-    const docRef = await db.addDoc(collectionRef, {
+    const docRef = await collectionRef.add({
       createdAt: new Date(),
       paymentMethod: paymentMethod,
       amount: amount,
@@ -52,7 +50,17 @@ async function addPayment(
   }
 }
 
-async function handleSuccessfulSubscriptionPayment(
+
+
+
+
+
+
+
+
+
+
+/* async function handleSuccessfulSubscriptionPayment(
   uid: string,
   customData: any,
   amount: number,
@@ -158,5 +166,4 @@ async function updateSubscriptionOfPayment(
   } catch (error) {
     console.error("Error updating subscription attribute of payment: ", error);
   }
-}
-*/
+} */
