@@ -1,13 +1,14 @@
 import fetch from "node-fetch";
+import actionsSingPay from "../../../config/singpay-config/action";
 
 export async function createInvoiceSingPay(amount: any) {
   const url = "https://gateway.singpay.ga/v1/ext";
 
   const data = {
     portefeuille: "66bdde2adc5276b625104a30",
-    reference: `payment_ref_${Date.now()}`, // Référence unique
-    redirect_success: "https://your-app.com/success",
-    redirect_error: "https://your-app.com/failed",
+    reference: `payment_ref_${Date.now()}`, 
+    redirect_success: actionsSingPay.redirect_success,
+    redirect_error: actionsSingPay.redirect_error,
     amount: amount,
     disbursement: "string",
     logoURL: "https://your-storage-url/logo.png",
