@@ -3,8 +3,8 @@ import setupPaydunya from "../../../config/paydunya-config/setup";
 
 export async function CreateInvoiceRequestPaydunya(requestBody: any) {
   // Configuration PayDunya
-  const PAYDUNYA_WEBSITE_URL = process.env.PAYDUNYA_WEBSITE_URL;
-  const PAYDUNYA_LOGO_URL = process.env.PAYDUNYA_LOGO_URL;
+  const PAYDUNYA_WEBSITE_URL = process.env.WEB_URL;
+  const PAYDUNYA_LOGO_URL = process.env.LOGO_URL;
 
   const apiUrl =
     "https://app.paydunya.com/sandbox-api/v1/checkout-invoice/create";

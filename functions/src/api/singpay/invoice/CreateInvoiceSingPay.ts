@@ -1,24 +1,26 @@
 import fetch from "node-fetch";
 import actionsSingPay from "../../../config/singpay-config/action";
+import storeSingPay from "../../../config/singpay-config/store";
+import setupSingPay from "../../../config/singpay-config/setup";
 
 export async function createInvoiceSingPay(amount: any) {
   const url = "https://gateway.singpay.ga/v1/ext";
 
   const data = {
-    portefeuille: "66bdde2adc5276b625104a30",
-    reference: `payment_ref_${Date.now()}`, 
+    portefeuille: storeSingPay.portefeuille,
+    reference: `payment_ref_${Date.now()}`,
     redirect_success: actionsSingPay.redirect_success,
     redirect_error: actionsSingPay.redirect_error,
     amount: amount,
     disbursement: "string",
-    logoURL: "https://your-storage-url/logo.png",
+    logoURL: storeSingPay.logoURL,
     isTransfer: false,
   };
 
-  const headers = {
-    "x-client-id": "your-client-id",
-    "x-client-secret": "your-client-secret",
-    "x-wallet": "your-wallet-id",
+  const headers: Record<string, string> = {
+    "x-client-id": setupSingPay.xClientId || "",
+    "x-client-secret": setupSingPay.xClientSecret || "",
+    "x-wallet": setupSingPay.xWallet || "",
     "Content-Type": "application/json",
   };
 

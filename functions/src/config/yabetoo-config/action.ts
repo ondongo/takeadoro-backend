@@ -1,7 +1,6 @@
 const actionsYabetoo = {
-    cancel_url: `${process.env.PAYDUNYA_WEBSITE_URL}/transfert`,
-    return_url: `${process.env.PAYDUNYA_WEBSITE_URL}/transfert`,
-    callback_url: `${process.env.PAYDUNYA_WEBSITE_URL}/api/paydunya/callback`,
+   
+    callback_url: `${process.env.WEB_URL}/callback`,
   };
   
   export default actionsYabetoo;

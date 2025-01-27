@@ -1,6 +1,6 @@
 const actionsSingPay = {
-  redirect_error: `${process.env.PAYDUNYA_WEBSITE_URL}/transfert`,
-  redirect_success: `${process.env.PAYDUNYA_WEBSITE_URL}/transfert`,
+  redirect_error: `${process.env.WEB_URL}/transfert`,
+  redirect_success: `${process.env.WEB_URL}/transfert`,
 };
 
 export default actionsSingPay; 
