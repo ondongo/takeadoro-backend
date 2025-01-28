@@ -1,29 +1,31 @@
+import { CheckInvoiceRequestPaydunya } from "../invoice/CheckInvoiceRequestPaydunya";
 import { handleInvoicePaymentSucceeded } from "./handlers/invoicePaymentSucceeded";
 
 export async function POST(req: Request) {
   try {
     const dataString = await req.text();
-
     const data = parseEncodedQueryString(dataString).data;
 
-    console.log("data callback", data);
-    const uid = data.custom_data.uid;
-    //const user = await adminAuth.getUser(uid); 
-   // console.log(data)
-    if (data.status === "completed") {
-      handleInvoicePaymentSucceeded(data);
+    console.log("Callback PayDunya reçu :", data);
+
+    const result = await CheckInvoiceRequestPaydunya(data.invoice.token);
+    
+    if (result.success && result.status === "completed") {
+      console.log("Le paiement PayDunya a été confirmé avec succès.");
+
+      await handleInvoicePaymentSucceeded(data); 
+   
+    } else {
+      console.error("Échec de la vérification du paiement PayDunya.");
     }
 
-    return new Response("Notification successfully received.", {
-      status: 200,
-    });
+    return new Response("Notification PayDunya reçue et traitée.", { status: 200 });
   } catch (error) {
-    console.log(error);
-    return new Response("Error processing the notification.", {
-      status: 500,
-    });
+    console.error("Erreur lors du traitement de la notification PayDunya :", error);
+    return new Response("Erreur serveur", { status: 500 });
   }
 }
+
 
 function parseEncodedQueryString(queryString: string): any {
   let decodedString = decodeURIComponent(queryString);

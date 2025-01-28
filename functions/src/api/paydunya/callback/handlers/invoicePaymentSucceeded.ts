@@ -4,7 +4,6 @@ if (admin.apps.length === 0) {
   admin.initializeApp();
 }
 
-
 const db = admin.firestore();
 
 export async function handleInvoicePaymentSucceeded(data: any) {
@@ -22,6 +21,23 @@ export async function handleInvoicePaymentSucceeded(data: any) {
     invoiceToken
   );
 
+  if (paymentId) {
+    console.log(
+      "Paiement enregistré avec succès, lancement du transfert via SingPay..."
+    );
+       // Choisir la plateforme de paiement à utiliser (SingPay ou Yabetoo)
+       if (paymentMethod === 'singpay') {
+        console.log("Lancement du transfert via SingPay...");
+        await triggerSingPayTransfer(data);
+      } else if (paymentMethod === 'yabetoo') {
+        console.log("Lancement du transfert via Yabetoo...");
+        await triggerYabetooTransfer(data); 
+      } else {
+        console.error("Méthode de paiement inconnue :", paymentMethod);
+      }
+
+    console.log("Transfert via SingPay effectué.");
+  }
   //handleSuccessfulSubscriptionPayment(uid, customData, amount, paymentId);
 }
 async function addPayment(
@@ -49,16 +65,6 @@ async function addPayment(
     return "";
   }
 }
-
-
-
-
-
-
-
-
-
-
 
 /* async function handleSuccessfulSubscriptionPayment(
   uid: string,
