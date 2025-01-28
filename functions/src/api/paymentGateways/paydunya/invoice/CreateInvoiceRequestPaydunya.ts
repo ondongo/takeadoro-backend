@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import setupPaydunya from "../../../config/paydunya-config/setup";
+import setupPaydunya from "../../../../config/paydunya-config/setup";
 
 export async function CreateInvoiceRequestPaydunya(requestBody: any) {
   // Configuration PayDunya

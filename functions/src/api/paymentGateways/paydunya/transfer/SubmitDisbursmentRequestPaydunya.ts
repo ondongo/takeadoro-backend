@@ -1,4 +1,4 @@
-import setupPaydunya from "../../../config/paydunya-config/setup";
+import setupPaydunya from "../../../../config/paydunya-config/setup";
 
 export async function submitDisbursementPaydunya(
   disburseToken: string,

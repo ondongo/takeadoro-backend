@@ -1,4 +1,4 @@
-import admin from "../../../../config/firebaseConfig";
+import admin from "../../../../../config/firebaseConfig";
 
 if (admin.apps.length === 0) {
   admin.initializeApp();

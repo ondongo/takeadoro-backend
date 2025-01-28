@@ -1,5 +1,5 @@
-import actionsPaydunya from "../../../config/paydunya-config/actions";
-import setupPaydunya from "../../../config/paydunya-config/setup";
+import actionsPaydunya from "../../../../config/paydunya-config/actions";
+import setupPaydunya from "../../../../config/paydunya-config/setup";
 import fetch from "node-fetch";
 export async function CheckInvoiceRequestPaydunya(token: string) {
   const apiUrl = `https://app.paydunya.com/sandbox-api/v1/checkout-invoice/confirm/${token}`;

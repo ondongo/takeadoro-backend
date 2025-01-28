@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
-import actionsSingPay from "../../../config/singpay-config/action";
-import storeSingPay from "../../../config/singpay-config/store";
-import setupSingPay from "../../../config/singpay-config/setup";
+import actionsSingPay from "../../../../config/singpay-config/action";
+import storeSingPay from "../../../../config/singpay-config/store";
+import setupSingPay from "../../../../config/singpay-config/setup";
 
 export async function createInvoiceSingPay(amount: any) {
   const url = "https://gateway.singpay.ga/v1/ext";
