@@ -22,8 +22,6 @@ export async function createDeposit(
     country: payerCountry,
     statementDescription: "Transfert international",
     metadata: [
-      { fieldName: "orderId", fieldValue: orderId },
-      { fieldName: "customerId", fieldValue: customerId, isPII: true },
       { fieldName: "destinationCountry", fieldValue: destinationCountry },
     ],
   };

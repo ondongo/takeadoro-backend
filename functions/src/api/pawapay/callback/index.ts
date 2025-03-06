@@ -7,25 +7,25 @@ export async function POST(req: Request) {
     const dataString = await req.text();
     const data = parseEncodedQueryString(dataString).data;
 
-    console.log("Callback PayDunya reçu :", data);
+    console.log("Callback reçu :", data);
 
     const result = await checkDepositStatus(data.invoice.token);
     
     if (result.success && result.data.status === "COMPLETED") {
-      console.log("Le paiement PayDunya a été confirmé avec succès.");
+      console.log("Le paiement a été confirmé avec succès.");
 
       await HandlerDepositSucceeded(data); 
    
     }
     
     else {
-      console.error("Échec de la vérification du paiement PayDunya.");
+      console.error("Échec de la vérification du paiement.");
       await HandlerDepositFailed(); 
     }
 
-    return new Response("Notification PayDunya reçue et traitée.", { status: 200 });
+    return new Response("Notificationreçue et traitée.", { status: 200 });
   } catch (error) {
-    console.error("Erreur lors du traitement de la notification PayDunya :", error);
+    console.error("Erreur lors du traitement de la notification xx :", error);
     return new Response("Erreur serveur", { status: 500 });
   }
 }

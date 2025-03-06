@@ -8,8 +8,7 @@ export async function createPayment(
   country: Country,
   returnUrl: string,
   reason: string,
-  orderId: string,
-  customerEmail: string
+  destinationCountry: string
 ) {
   const apiUrl = `${setupPawapay.baseUrl}/v1/widget/sessions`;
 
@@ -22,8 +21,7 @@ export async function createPayment(
     language: "FR",
     reason,
     metadata: [
-      { fieldName: "orderId", fieldValue: orderId },
-      { fieldName: "customerId", fieldValue: customerEmail, isPII: true },
+      { fieldName: "destinationCountry", fieldValue: destinationCountry },
     ],
   };
 

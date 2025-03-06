@@ -1,63 +1,78 @@
 import { createPayout } from "../../payouts/payoutService";
+import admin from "../../../../config/firebaseConfig";
+
+if (admin.apps.length === 0) {
+  admin.initializeApp();
+}
+
+const db = admin.firestore();
 
 export async function HandlerDepositSucceeded(data: any) {
   try {
-    const { depositId, amount, currency, metadata } = data.body;
+    const {
+      depositId,
+      amount,
+      currency,
+      countryOrigin,
+      metadata,
+      customerPhone,
+    } = data.body;
 
     console.log("Received deposit callback:", data.body);
-
     console.log(`Deposit ${depositId} confirmed. Initiating payout...`);
 
-    const orderId = metadata.find(
-      (m: any) => m.fieldName === "orderId"
-    )?.fieldValue;
-    const customerEmail = metadata.find(
-      (m: any) => m.fieldName === "customerId"
-    )?.fieldValue;
     const destinationCountry = metadata.find(
       (m: any) => m.fieldName === "destinationCountry"
     )?.fieldValue;
 
     if (!destinationCountry) {
       console.error("No destination country found in metadata!");
-
-      return {
-        status: 400,
-        message: "Missing destination country",
-      };
+      return { status: 400, message: "Missing destination country" };
     }
 
+    // Enregistrer la transaction réussie dans Firestore
+    const paymentRef = await db.collection("transactions").add({
+      depositId,
+      amount,
+      currency,
+      countryOrigin,
+      destinationCountry,
+      status: "succeeded",
+      createdAt: new Date(),
+      type: "deposit",
+    });
+
+    console.log("Transaction enregistrée avec succès :", paymentRef.id);
+
+    // Lancer le paiement
     const payoutResponse = await createPayout(
       amount,
       currency,
       getCorrespondent(destinationCountry),
       getRecipientPhone(destinationCountry),
       destinationCountry,
-      orderId,
-      customerEmail
-
+      countryOrigin,
+      depositId,
+      customerPhone
     );
 
     if (payoutResponse.success) {
       console.log("Payout initiated successfully:", payoutResponse.data);
-      return {
-        status: 200,
-        message: "Payout triggered successfully",
-      };
+      return { status: 200, message: "Payout triggered successfully" };
     } else {
-      console.error("Payout initiation failed:", payoutResponse.error);
-
+      console.error("Payout initiation failed:", payoutResponse.message);
       return {
         status: 500,
         message: "Payout initiation failed",
+        error: payoutResponse.message, 
       };
     }
   } catch (error: any) {
-    console.error("Error handling deposit callback:", error);
-
+    console.error("Error handling deposit success:", error);
     return {
       status: 500,
-      message: error.toString(),
+      message: "Internal server error",
+      error: error.toString(),
     };
   }
 }

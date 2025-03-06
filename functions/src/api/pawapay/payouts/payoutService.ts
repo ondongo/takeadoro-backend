@@ -2,7 +2,15 @@ import { randomUUID } from "crypto";
 import setupPawapay from "../../../config/pawapay-config/setup";
 import { Country } from "../../../enum/country";
 import { Currency } from "../../../enum/currency";
+import { checkBalanceByCountry } from "../wallet-balances/checkBalanceService";
+import { createRefund } from "../refunds/refundService";
+import admin from "../../../config/firebaseConfig";
 
+if (admin.apps.length === 0) {
+  admin.initializeApp();
+}
+
+const db = admin.firestore();
 
 export async function createPayout(
   amount: number,
@@ -10,13 +18,27 @@ export async function createPayout(
   correspondent: string,
   recipientPhone: string,
   country: Country,
-  orderId: string,
-  customerEmail: string
+  countryOrigin: string,
+  depositId: string,
+  customerPhone: string
 ) {
+  const balance = await checkBalanceByCountry(country);
+
+  if (balance === null) {
+    return { success: false, message: "Impossible de vérifier le solde." };
+  }
+
+  if (amount > balance) {
+    return {
+      success: false,
+      message: "Solde insuffisant pour effectuer ce payout.",
+    };
+  }
+
   const apiUrl = `${setupPawapay.baseUrl}/payouts`;
 
   const payload = {
-    payoutId: randomUUID,
+    payoutId: randomUUID(),
     amount: amount.toString(),
     currency,
     correspondent,
@@ -27,10 +49,7 @@ export async function createPayout(
     customerTimestamp: new Date().toISOString(),
     statementDescription: "Payout transaction",
     country,
-    metadata: [
-      { fieldName: "orderId", fieldValue: orderId },
-      { fieldName: "customerId", fieldValue: customerEmail, isPII: true },
-    ],
+    metadata: [{ fieldName: "CountryOrigin", fieldValue: countryOrigin }],
   };
 
   try {
@@ -42,9 +61,38 @@ export async function createPayout(
       body: JSON.stringify(payload),
     });
     const data = await response.json();
-    return data;
+
+    if (!response.ok) {
+      console.error("Payout échoué, remboursement en cours...");
+      await createRefund(depositId, amount, customerPhone);
+      return {
+        success: false,
+        message: "Payout échoué, remboursement initié.",
+      };
+    }
+
+    const payoutRef = await db.collection("payouts").add({
+      payoutId: data.payoutId,
+      amount,
+      currency,
+      recipientPhone,
+      status: "succeeded",
+      createdAt: new Date(),
+      type: "payout",
+      depositId, 
+      customerPhone,
+      countryOrigin,
+    });
+
+    console.log("Payout enregistré avec succès :", payoutRef.id);
+
+    return { success: true, data };
   } catch (error) {
-    console.error("Error creating payout:", error);
-    return null;
+    console.error("Erreur lors du payout, remboursement en cours...");
+    await createRefund(depositId, amount, customerPhone);
+    return {
+      success: false,
+      message: "Erreur lors du payout, remboursement initié.",
+    };
   }
 }
