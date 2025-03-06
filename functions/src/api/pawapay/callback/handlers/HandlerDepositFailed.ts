@@ -22,7 +22,7 @@ export async function HandlerDepositFailed(
     );
 
     // Enregistrer l'échec de transaction dans Firestore
-    const failedRef = await db.collection("deposits").add({
+    const failedRef = await db.collection("Deposits").add({
       depositId,
       amount,
       currency,

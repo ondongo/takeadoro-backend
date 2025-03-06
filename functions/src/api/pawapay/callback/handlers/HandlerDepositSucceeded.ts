@@ -27,7 +27,7 @@ export async function HandlerDepositSucceeded(data: any) {
     }
 
     // Enregistrer la transaction réussie dans Firestore
-    const paymentRef = await db.collection("deposits").add({
+    const paymentRef = await db.collection("Deposits").add({
       depositId,
       amount,
       currency,
@@ -53,7 +53,7 @@ export async function HandlerDepositSucceeded(data: any) {
       console.log("Payout initié avec succès:", payoutResponse.data);
 
       // Enregistrer le payout en Firestore
-      const payoutRef = await db.collection("payouts").add({
+      const payoutRef = await db.collection("Payouts").add({
         payoutId: payoutResponse.data.payoutId,
         amount,
         currency,

@@ -9,7 +9,7 @@ export async function POST(req: Request) {
 
     console.log("Callback reçu :", data);
 
-    const result = await checkDepositStatus(data.invoice.token);
+    const result = await checkDepositStatus(data.depositId);
     
     if (result.success && result.data.status === "COMPLETED") {
       console.log("Le paiement a été confirmé avec succès.");

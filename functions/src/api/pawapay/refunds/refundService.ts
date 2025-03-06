@@ -36,7 +36,7 @@ export async function createRefund(
     const data = await response.json();
 
     // Enregistrer le remboursement dans Firestore
-    const refundRef = await db.collection("refunds").add({
+    const refundRef = await db.collection("Refunds").add({
       refundId,
       depositId,
       amount,
