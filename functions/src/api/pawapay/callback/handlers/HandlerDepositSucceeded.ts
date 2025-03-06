@@ -27,7 +27,7 @@ export async function HandlerDepositSucceeded(data: any) {
     }
 
     // Enregistrer la transaction réussie dans Firestore
-    const paymentRef = await db.collection("transactions").add({
+    const paymentRef = await db.collection("deposits").add({
       depositId,
       amount,
       currency,
@@ -35,7 +35,6 @@ export async function HandlerDepositSucceeded(data: any) {
       destinationCountry,
       status: "succeeded",
       createdAt: new Date(),
-      type: "deposit",
     });
 
     console.log("Transaction enregistrée avec succès :", paymentRef.id);
