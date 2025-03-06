@@ -1,5 +1,6 @@
 import { createPayout } from "../../payouts/payoutService";
 import admin from "../../../../config/firebaseConfig";
+import { createRefund } from "../../refunds/refundService";
 
 if (admin.apps.length === 0) {
   admin.initializeApp();
@@ -9,18 +10,13 @@ const db = admin.firestore();
 
 export async function HandlerDepositSucceeded(data: any) {
   try {
-    const {
-      depositId,
-      amount,
-      currency,
-      countryOrigin,
-      metadata,
-      customerPhone,
-    } = data.body;
+    const { depositId, amount, currency, countryOrigin, metadata, payerPhone } =
+      data.body;
 
     console.log("Received deposit callback:", data.body);
     console.log(`Deposit ${depositId} confirmed. Initiating payout...`);
 
+    // Extraction du pays de destination depuis les métadonnées
     const destinationCountry = metadata.find(
       (m: any) => m.fieldName === "destinationCountry"
     )?.fieldValue;
@@ -44,34 +40,53 @@ export async function HandlerDepositSucceeded(data: any) {
 
     console.log("Transaction enregistrée avec succès :", paymentRef.id);
 
-    // Lancer le paiement
+    // Tentative d'initiation du payout
     const payoutResponse = await createPayout(
       amount,
       currency,
       getCorrespondent(destinationCountry),
       getRecipientPhone(destinationCountry),
       destinationCountry,
-      countryOrigin,
-      depositId,
-      customerPhone
+      countryOrigin
     );
 
     if (payoutResponse.success) {
-      console.log("Payout initiated successfully:", payoutResponse.data);
-      return { status: 200, message: "Payout triggered successfully" };
+      console.log("Payout initié avec succès:", payoutResponse.data);
+
+      // Enregistrer le payout en Firestore
+      const payoutRef = await db.collection("payouts").add({
+        payoutId: payoutResponse.data.payoutId,
+        amount,
+        currency,
+        recipientPhone: getRecipientPhone(destinationCountry),
+        status: "succeeded",
+        createdAt: new Date(),
+        type: "payout",
+        depositId,
+        payerPhone,
+        countryOrigin,
+        destinationCountry,
+      });
+
+      console.log("Payout enregistré avec succès :", payoutRef.id);
+      return { status: 200, message: "Payout initiated successfully" };
     } else {
-      console.error("Payout initiation failed:", payoutResponse.message);
+      console.error("Échec de l'initiation du payout:", payoutResponse.message);
+
+      // Gestion des erreurs, commencer le processus de remboursement
+      await createRefund(depositId, amount, payerPhone);
       return {
         status: 500,
-        message: "Payout initiation failed",
-        error: payoutResponse.message, 
+        message: "Payout initiation failed, refund initiated",
       };
     }
   } catch (error: any) {
-    console.error("Error handling deposit success:", error);
+    // Gestion des erreurs et déclenchement du remboursement
+    console.error("Erreur lors de l'initiation du payout:", error);
+
     return {
       status: 500,
-      message: "Internal server error",
+      message: "Error during payout initiation, refund initiated",
       error: error.toString(),
     };
   }

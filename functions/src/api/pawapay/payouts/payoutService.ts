@@ -18,9 +18,7 @@ export async function createPayout(
   correspondent: string,
   recipientPhone: string,
   country: Country,
-  countryOrigin: string,
-  depositId: string,
-  customerPhone: string
+  countryOrigin: string
 ) {
   const balance = await checkBalanceByCountry(country);
 
@@ -64,32 +62,17 @@ export async function createPayout(
 
     if (!response.ok) {
       console.error("Payout échoué, remboursement en cours...");
-      await createRefund(depositId, amount, customerPhone);
+
       return {
         success: false,
         message: "Payout échoué, remboursement initié.",
       };
     }
 
-    const payoutRef = await db.collection("payouts").add({
-      payoutId: data.payoutId,
-      amount,
-      currency,
-      recipientPhone,
-      status: "succeeded",
-      createdAt: new Date(),
-      type: "payout",
-      depositId, 
-      customerPhone,
-      countryOrigin,
-    });
-
-    console.log("Payout enregistré avec succès :", payoutRef.id);
-
     return { success: true, data };
   } catch (error) {
     console.error("Erreur lors du payout, remboursement en cours...");
-    await createRefund(depositId, amount, customerPhone);
+
     return {
       success: false,
       message: "Erreur lors du payout, remboursement initié.",

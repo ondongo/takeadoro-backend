@@ -6,8 +6,6 @@ export async function createDeposit(
   payerPhone: string,
   payerCountry: string,
   destinationCountry: string,
-  orderId: string,
-  customerId: string
 ) {
   const apiUrl = `${setupPawapay.baseUrl}/deposits`;
 

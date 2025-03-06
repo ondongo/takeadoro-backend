@@ -11,7 +11,7 @@ const db = admin.firestore();
 export async function createRefund(
   depositId: string,
   amount: number,
-  customerPhone: string
+  payerPhone: string
 ) {
   const apiUrl = `${setupPawapay.baseUrl}/refunds`;
   const refundId = randomUUID().toString();
@@ -20,7 +20,7 @@ export async function createRefund(
     depositId,
     amount: amount.toString(),
     metadata: [
-      { fieldName: "customerId", fieldValue: customerPhone, isPII: true },
+      { fieldName: "payerPhone", fieldValue: payerPhone, isPII: true },
     ],
   };
 
@@ -40,7 +40,7 @@ export async function createRefund(
       refundId,
       depositId,
       amount,
-      customerPhone,
+      payerPhone,
       status: data?.status || "PENDING",
       response: data,
       createdAt: new Date(),
