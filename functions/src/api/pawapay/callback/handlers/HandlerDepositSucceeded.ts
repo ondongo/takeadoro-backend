@@ -60,7 +60,6 @@ export async function HandlerDepositSucceeded(data: any) {
         recipientPhone: getRecipientPhone(destinationCountry),
         status: "succeeded",
         createdAt: new Date(),
-        type: "payout",
         depositId,
         payerPhone,
         countryOrigin,

@@ -2,7 +2,7 @@ import { checkDepositStatus } from "../deposits/depositService";
 import { HandlerDepositFailed } from "./handlers/HandlerDepositFailed";
 import { HandlerDepositSucceeded } from "./handlers/HandlerDepositSucceeded";
 
-export async function POST(req: Request) {
+export async function handlePawaPayCallback(req: any, res: any) {
   try {
     const dataString = await req.text();
     const data = parseEncodedQueryString(dataString).data;
@@ -10,27 +10,23 @@ export async function POST(req: Request) {
     console.log("Callback reçu :", data);
 
     const result = await checkDepositStatus(data.depositId);
-    
+
     if (result.success && result.data.status === "COMPLETED") {
       console.log("Le paiement a été confirmé avec succès.");
-
-      await HandlerDepositSucceeded(data); 
-   
-    }
-    
-    else {
+      await HandlerDepositSucceeded(data);
+    } else {
       console.error("Échec de la vérification du paiement.");
-      await HandlerDepositFailed(); 
+      await HandlerDepositFailed();
     }
 
-    return new Response("Notificationreçue et traitée.", { status: 200 });
+    res.status(200).send("Notification reçue et traitée.");
   } catch (error) {
-    console.error("Erreur lors du traitement de la notification xx :", error);
-    return new Response("Erreur serveur", { status: 500 });
+    console.error("Erreur lors du traitement de la notification :", error);
+    res.status(500).send("Erreur serveur");
   }
 }
 
-
+// Fonction pour parser les données reçues
 function parseEncodedQueryString(queryString: string): any {
   let decodedString = decodeURIComponent(queryString);
   decodedString = decodedString.replace(/\+/g, " ");

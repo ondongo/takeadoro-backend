@@ -8,6 +8,8 @@
  */
 
 import { onRequest } from "firebase-functions/v2/https";
+import { createDeposit } from "./api/pawapay/deposits/depositService";
+import { handlePawaPayCallback } from "./api/pawapay/callback";
 /* import * as logger from "firebase-functions/logger";
 import { makeCashInRequest } from "./api/orange-money/cashins/cashin";
 import { checkBalance } from "./api/orange-money/balance/checkBalance"; */
@@ -20,27 +22,47 @@ import { checkBalance } from "./api/orange-money/balance/checkBalance"; */
 //   logger.info("Hello logs!", {structuredData: true});
 //   response.send("Hello from Firebase!");
 // });
+export const httpCreateDeposit = onRequest(async (req: any, res: any) => {
+  try {
+    // Vérification des paramètres reçus
+    const { amount, currency, payerPhone, payerCountry, destinationCountry } = req.body;
 
-export const httpCreateInvoice = onRequest(async (req:any, res:any) => {
- /*  try {
-    const body = req.body;
-    const response = await createInvoiceRequest(body);
+    if (
+      !amount ||
+      !currency ||
+      !payerPhone ||
+      !payerCountry ||
+      !destinationCountry
+    ) {
+      return res.status(400).json({
+        error: true,
+        message: "Missing required fields",
+      });
+    }
+
+    const response = await createDeposit(
+      amount,
+      currency,
+      payerPhone,
+      payerCountry,
+      destinationCountry
+    );
+
     res.status(response.success ? 200 : 500).json(response);
   } catch (err) {
-    console.error("Server error:", err);
-    res.status(500).json({ error: true, message: "Server error" });
-  } */
+    console.error("Error in createDeposit:", err);
+    res.status(500).json({ error: true, message: "Internal server error" });
+  }
 });
 
-
-
-
-
-
-
-
-
-
+export const pawaPayCallback = onRequest(async (req, res) => {
+  try {
+    await handlePawaPayCallback(req, res);
+  } catch (err) {
+    console.error("Error in pawaPayCallback:", err);
+    res.status(500).send("Internal server error");
+  }
+});
 /* export const cashInOrange = onRequest(async (req: any, res: any) => {
   try {
     const { partnerMsisdn, amount, customerMsisdn } = req.body;
