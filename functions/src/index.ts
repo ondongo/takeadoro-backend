@@ -57,8 +57,8 @@ export const httpCreateDeposit = onRequest(async (req: any, res: any) => {
       currency,
       payerPhone,
       payerCountry,
-      correspondent,
       destinationCountry,
+      correspondent,
       destinationPhone,
       destinationCorrespondent
     );

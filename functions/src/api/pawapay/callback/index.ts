@@ -4,8 +4,7 @@ import { HandlerDepositSucceeded } from "./handlers/HandlerDepositSucceeded";
 
 export async function handlePawaPayCallback(req: any, res: any) {
   /* try { */
-    const dataString = await req.text();
-    const data = parseEncodedQueryString(dataString).data;
+    const data = req.data;
 
     console.log("Callback reçu :", data);
 

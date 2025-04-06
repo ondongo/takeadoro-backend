@@ -10,7 +10,7 @@ const db = admin.firestore();
 export async function HandlerDepositFailed(
   depositId?: string,
   status?: string,
-  amount?: number,
+  amount?: string,
   currency?: string,
   customerPhone?: string
 ) {

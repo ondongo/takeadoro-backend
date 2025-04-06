@@ -38,7 +38,7 @@ export async function createPayout(
       type: "MSISDN",
     },
     customerTimestamp: new Date().toISOString(),
-    statementDescription: "Payout transaction",
+    statementDescription: "Payout",
     country,
     metadata: [
       { fieldName: "countryOrigin", fieldValue: countryOrigin },

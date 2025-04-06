@@ -24,7 +24,7 @@ export async function createDeposit(
     },
     customerTimestamp: new Date().toISOString(),
     country: payerCountry,
-    statementDescription: "Transfert international",
+    statementDescription: "Transfert",
     metadata: [
       { fieldName: "destinationCountry", fieldValue: destinationCountry },
       { fieldName: "destinationPhone", fieldValue: destinationPhone },
