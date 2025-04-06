@@ -1,9 +1,8 @@
-import { randomUUID } from "crypto";
+import { v4 as uuidv4 } from "uuid";
 import setupPawapay from "../../../config/pawapay-config/setup";
 import { Country } from "../../../enum/country";
 import { Currency } from "../../../enum/currency";
 import { checkBalanceByCountry } from "../wallet-balances/checkBalanceService";
-import { createRefund } from "../refunds/refundService";
 import admin from "../../../config/firebaseConfig";
 
 if (admin.apps.length === 0) {
@@ -36,7 +35,7 @@ export async function createPayout(
   const apiUrl = `${setupPawapay.baseUrl}/payouts`;
 
   const payload = {
-    payoutId: randomUUID(),
+    payoutId: uuidv4(),
     amount: amount.toString(),
     currency,
     correspondent,
@@ -55,6 +54,7 @@ export async function createPayout(
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.PAWAPAY_TOKEN_SANDBOX}`,
       },
       body: JSON.stringify(payload),
     });

@@ -1,9 +1,5 @@
 {
   "projects": {
-    "default": "takeadoro",
-    "takeadoro ": "takeadoro"
-  },
-  "targets": {},
-  "etags": {},
-  "dataconnectEmulatorConfig": {}
+    "default": "takeadoro"
+  }
 }

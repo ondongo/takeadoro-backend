@@ -1,7 +1,6 @@
 import setupPawapay from "../../../config/pawapay-config/setup";
 import admin from "../../../config/firebaseConfig";
-import { randomUUID } from "crypto";
-
+import { v4 as uuidv4 } from "uuid";
 if (admin.apps.length === 0) {
   admin.initializeApp();
 }
@@ -14,7 +13,7 @@ export async function createRefund(
   payerPhone: string
 ) {
   const apiUrl = `${setupPawapay.baseUrl}/refunds`;
-  const refundId = randomUUID().toString();
+  const refundId = uuidv4();
   const payload = {
     refundId,
     depositId,
@@ -29,6 +28,7 @@ export async function createRefund(
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${process.env.PAWAPAY_TOKEN_SANDBOX}`,
       },
       body: JSON.stringify(payload),
     });

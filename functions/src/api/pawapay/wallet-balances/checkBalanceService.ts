@@ -28,6 +28,7 @@ export async function checkBalanceByCountry(country: Country) {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${process.env.PAWAPAY_TOKEN_SANDBOX}`,
         },
       });
       const data = await response.json();

@@ -1,3 +1,0 @@
-async function CreateInvoiceRequesYabetoo() {
-  return;
-}
