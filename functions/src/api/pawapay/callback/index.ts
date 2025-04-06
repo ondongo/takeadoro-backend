@@ -3,13 +3,13 @@ import { HandlerDepositFailed } from "./handlers/HandlerDepositFailed";
 import { HandlerDepositSucceeded } from "./handlers/HandlerDepositSucceeded";
 
 export async function handlePawaPayCallback(req: any, res: any) {
-  try {
+  /* try { */
     const dataString = await req.text();
     const data = parseEncodedQueryString(dataString).data;
 
     console.log("Callback reçu :", data);
 
-    const result = await checkDepositStatus(data.depositId);
+  /*   const result = await checkDepositStatus(data.depositId);
 
     if (result.success && result.data.status === "COMPLETED") {
       console.log("Le paiement a été confirmé avec succès.");
@@ -23,7 +23,7 @@ export async function handlePawaPayCallback(req: any, res: any) {
   } catch (error) {
     console.error("Erreur lors du traitement de la notification :", error);
     res.status(500).send("Erreur serveur");
-  }
+  } */
 }
 
 // Fonction pour parser les données reçues
