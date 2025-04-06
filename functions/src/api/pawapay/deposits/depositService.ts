@@ -1,5 +1,5 @@
 import setupPawapay from "../../../config/pawapay-config/setup";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 export async function createDeposit(
   amount: number,
@@ -7,14 +7,17 @@ export async function createDeposit(
   payerPhone: string,
   payerCountry: string,
   destinationCountry: string,
+  correspondent: string,
+  destinationPhone: string,
+  destinationCorrespondent:string
 ) {
   const apiUrl = `${setupPawapay.baseUrl}/deposits`;
 
   const payload = {
     depositId: uuidv4(),
-    amount: amount,
+    amount: amount.toString(),
     currency: currency,
-    correspondent: getCorrespondent(payerCountry),
+    correspondent: correspondent,
     payer: {
       address: { value: payerPhone },
       type: "MSISDN",
@@ -24,16 +27,17 @@ export async function createDeposit(
     statementDescription: "Transfert international",
     metadata: [
       { fieldName: "destinationCountry", fieldValue: destinationCountry },
+      { fieldName: "destinationPhone", fieldValue: destinationPhone },
+      { fieldName: "destinationCorrespondent", fieldValue: destinationCorrespondent },
     ],
   };
 
-  
   try {
     const response = await fetch(apiUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.PAWAPAY_TOKEN_SANDBOX}`,
+        Authorization: `Bearer ${process.env.PAWAPAY_TOKEN_SANDBOX}`,
       },
       body: JSON.stringify(payload),
     });
@@ -57,7 +61,6 @@ export async function createDeposit(
   }
 }
 
-
 export async function checkDepositStatus(depositId: string) {
   const apiUrl = `${setupPawapay.baseUrl}/deposits/${depositId}`;
 
@@ -65,7 +68,7 @@ export async function checkDepositStatus(depositId: string) {
     const response = await fetch(apiUrl, {
       method: "GET",
       headers: {
-        "Authorization": `Bearer ${process.env.PAWAPAY_TOKEN_SANDBOX}`,
+        Authorization: `Bearer ${process.env.PAWAPAY_TOKEN_SANDBOX}`,
       },
     });
 

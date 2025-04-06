@@ -9,7 +9,7 @@ const db = admin.firestore();
 
 export async function createRefund(
   depositId: string,
-  amount: number,
+  amount: string,
   payerPhone: string
 ) {
   const apiUrl = `${setupPawapay.baseUrl}/refunds`;

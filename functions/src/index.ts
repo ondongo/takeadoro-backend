@@ -25,14 +25,26 @@ import { checkBalance } from "./api/orange-money/balance/checkBalance"; */
 export const httpCreateDeposit = onRequest(async (req: any, res: any) => {
   try {
     // Vérification des paramètres reçus
-    const { amount, currency, payerPhone, payerCountry, destinationCountry } = req.body;
+    const {
+      amount,
+      currency,
+      payerPhone,
+      payerCountry,
+      correspondent,
+      destinationCountry,
+      destinationPhone,
+      destinationCorrespondent,
+    } = req.body;
 
     if (
       !amount ||
       !currency ||
       !payerPhone ||
       !payerCountry ||
-      !destinationCountry
+      !destinationCountry ||
+      !correspondent ||
+      !destinationPhone ||
+      !destinationCorrespondent
     ) {
       return res.status(400).json({
         error: true,
@@ -45,7 +57,10 @@ export const httpCreateDeposit = onRequest(async (req: any, res: any) => {
       currency,
       payerPhone,
       payerCountry,
-      destinationCountry
+      correspondent,
+      destinationCountry,
+      destinationPhone,
+      destinationCorrespondent
     );
 
     res.status(response.success ? 200 : 500).json(response);

@@ -1,23 +1,17 @@
 import { v4 as uuidv4 } from "uuid";
 import setupPawapay from "../../../config/pawapay-config/setup";
 import { Country } from "../../../enum/country";
-import { Currency } from "../../../enum/currency";
 import { checkBalanceByCountry } from "../wallet-balances/checkBalanceService";
-import admin from "../../../config/firebaseConfig";
-
-if (admin.apps.length === 0) {
-  admin.initializeApp();
-}
-
-const db = admin.firestore();
 
 export async function createPayout(
-  amount: number,
-  currency: Currency,
+  amount: string,
+  currency: string,
   correspondent: string,
   recipientPhone: string,
-  country: Country,
-  countryOrigin: string
+  country: string,
+  countryOrigin: string,
+  correspondentOrigin: string,
+  phoneOrigin: string
 ) {
   const balance = await checkBalanceByCountry(country);
 
@@ -25,7 +19,7 @@ export async function createPayout(
     return { success: false, message: "Impossible de vérifier le solde." };
   }
 
-  if (amount > balance) {
+  if (Number(amount) > balance) {
     return {
       success: false,
       message: "Solde insuffisant pour effectuer ce payout.",
@@ -46,7 +40,11 @@ export async function createPayout(
     customerTimestamp: new Date().toISOString(),
     statementDescription: "Payout transaction",
     country,
-    metadata: [{ fieldName: "CountryOrigin", fieldValue: countryOrigin }],
+    metadata: [
+      { fieldName: "countryOrigin", fieldValue: countryOrigin },
+      { fieldName: "correspondentOrigin", fieldValue: correspondentOrigin },
+      { fieldName: "phoneOrigin", fieldValue: phoneOrigin },
+    ],
   };
 
   try {

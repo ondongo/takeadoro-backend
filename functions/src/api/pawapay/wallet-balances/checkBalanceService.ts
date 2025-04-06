@@ -20,7 +20,7 @@ export async function checkBalance() {
 }
 
 
-export async function checkBalanceByCountry(country: Country) {
+export async function checkBalanceByCountry(country: string) {
     const apiUrl = `${setupPawapay.baseUrl}/wallet-balances/${country}`;
   
     try {
