@@ -9,44 +9,36 @@ if (admin.apps.length === 0) {
 const db = admin.firestore();
 
 export async function HandlerDepositSucceeded(data: any) {
+  console.log("Received deposit callback:", data);
   try {
     const {
       depositId,
-      amount,
+      depositedAmount,
       currency,
       country,
       metadata,
       correspondent,
       payer,
-    } = data.body;
+    } = data;
 
-    console.log("Received deposit callback:", data.body);
     console.log(`Deposit ${depositId} confirmed. Initiating payout...`);
 
     const payerPhone = payer.address.value;
     // Extraction du pays de destination depuis les métadonnées
-    const destinationCountry = metadata.find(
-      (m: any) => m.fieldName === "destinationCountry"
-    )?.fieldValue;
 
+    const destinationCountry = metadata.destinationCountry;
     if (!destinationCountry) {
       console.error("No destination country found in metadata!");
       return { status: 400, message: "Missing destination country" };
     }
 
-    const destinationPhone = metadata.find(
-      (m: any) => m.fieldName === "destinationPhone"
-    )?.fieldValue;
-
+    const destinationPhone = metadata.destinationPhone;
     if (!destinationPhone) {
-      console.error("No destination country found in metadata!");
+      console.error("No destination phone found in metadata!");
       return { status: 400, message: "Missing destination phone" };
     }
 
-    const destinationCorrespondent = metadata.find(
-      (m: any) => m.fieldName === "destinationCorrespondent"
-    )?.fieldValue;
-
+    const destinationCorrespondent = metadata.destinationCorrespondent;
     if (!destinationCorrespondent) {
       console.error("No destination correspondent found in metadata!");
       return { status: 400, message: "Missing destination correspondent " };
@@ -55,7 +47,7 @@ export async function HandlerDepositSucceeded(data: any) {
     // Enregistrer la transaction réussie dans Firestore
     const paymentRef = await db.collection("Deposits").add({
       depositId,
-      amount,
+      depositedAmount,
       currencyOrigin: currency,
       countryOrigin: country,
       correspondentOrigin: correspondent,
@@ -72,7 +64,7 @@ export async function HandlerDepositSucceeded(data: any) {
 
     // Tentative d'initiation du payout
     const payoutResponse = await createPayout(
-      amount,
+      depositedAmount,
       currency === "XOF" ? "XAF" : "XOF",
       destinationCorrespondent,
       destinationPhone,
@@ -82,13 +74,13 @@ export async function HandlerDepositSucceeded(data: any) {
       payerPhone
     );
 
-    if (payoutResponse.success) {
+    if (payoutResponse.success && payoutResponse.data.status === "ACCEPTED") {
       console.log("Payout initié avec succès:", payoutResponse.data);
 
       // Enregistrer le payout en Firestore
       const payoutRef = await db.collection("Payouts").add({
         payoutId: payoutResponse.data.payoutId,
-        amount,
+        depositedAmount,
         recipientCurrency: currency === "XOF" ? "XAF" : "XOF",
         recipientPhone: destinationPhone,
         recipientCountry: destinationCountry,
@@ -108,7 +100,7 @@ export async function HandlerDepositSucceeded(data: any) {
       console.error("Échec de l'initiation du payout:", payoutResponse.message);
 
       // Gestion des erreurs, commencer le processus de remboursement
-      await createRefund(depositId, amount, payerPhone);
+      await createRefund(depositId, depositedAmount, payerPhone);
       return {
         status: 500,
         message: "Payout initiation failed, refund initiated",

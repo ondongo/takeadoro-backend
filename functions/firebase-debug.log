@@ -1,0 +1,657 @@
+[debug] [2025-04-13T23:22:44.594Z] ----------------------------------------------------------------------
+[debug] [2025-04-13T23:22:44.599Z] Command:       /Users/macbookpro/.nvm/versions/node/v22.14.0/bin/node /Users/macbookpro/.nvm/versions/node/v22.14.0/bin/firebase emulators:start --only functions
+[debug] [2025-04-13T23:22:44.600Z] CLI Version:   14.1.0
+[debug] [2025-04-13T23:22:44.601Z] Platform:      darwin
+[debug] [2025-04-13T23:22:44.601Z] Node Version:  v22.14.0
+[debug] [2025-04-13T23:22:44.602Z] Time:          Mon Apr 14 2025 01:22:44 GMT+0200 (heure d’été d’Europe centrale)
+[debug] [2025-04-13T23:22:44.603Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-04-13T23:22:44.881Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-04-13T23:22:44.887Z] > authorizing via signed-in user (prince.ondongo@ism.edu.sn)
+[info] i  emulators: Starting emulators: functions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions"}}
+[debug] [2025-04-13T23:22:49.371Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-04-13T23:22:49.371Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2025-04-13T23:22:49.379Z] [hub] writing locator at /var/folders/b_/4ng5ksrx5zd137tjgcjc94j80000gn/T/hub-takeadoro.json
+[debug] [2025-04-13T23:22:53.836Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-04-13T23:22:53.836Z] [eventarc] Eventarc Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-04-13T23:22:53.836Z] [tasks] Cloud Tasks Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-04-13T23:22:53.837Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5001}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}],"tasks":[{"address":"127.0.0.1","family":"IPv4","port":9499}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
+[warn] ⚠  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: apphosting, auth, firestore, database, hosting, pubsub, storage, dataconnect {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mapphosting, auth, firestore, database, hosting, pubsub, storage, dataconnect\u001b[22m"}}
+[debug] [2025-04-13T23:22:53.852Z] defaultcredentials: writing to file /Users/macbookpro/.config/firebase/prince_ondongo_ism.edu.sn_application_default_credentials.json
+[debug] [2025-04-13T23:22:53.856Z] Setting GAC to /Users/macbookpro/.config/firebase/prince_ondongo_ism.edu.sn_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /Users/macbookpro/.config/firebase/prince_ondongo_ism.edu.sn_application_default_credentials.json"}}
+[debug] [2025-04-13T23:22:53.856Z] Checked if tokens are valid: true, expires at: 1744589323176
+[debug] [2025-04-13T23:22:53.856Z] Checked if tokens are valid: true, expires at: 1744589323176
+[debug] [2025-04-13T23:22:53.857Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/takeadoro/adminSdkConfig [none]
+[debug] [2025-04-13T23:22:54.347Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/takeadoro/adminSdkConfig 200
+[debug] [2025-04-13T23:22:54.348Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/takeadoro/adminSdkConfig {"projectId":"takeadoro","storageBucket":"takeadoro.appspot.com","locationId":"europe-west"}
+[info] i  functions: Watching "/Users/macbookpro/Projets/takeadoro-backend/functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/Users/macbookpro/Projets/takeadoro-backend/functions\" for Cloud Functions..."}}
+[debug] [2025-04-13T23:22:54.373Z] Validating nodejs source
+[debug] [2025-04-13T23:22:58.421Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^6.3.2",
+    "node-fetch": "^3.3.2",
+    "sib-api-v3-sdk": "^8.5.0",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "firebase-functions-test": "^3.1.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2025-04-13T23:22:58.421Z] Building nodejs source
+[debug] [2025-04-13T23:22:58.422Z] Failed to find version of module node: reached end of search path /Users/macbookpro/Projets/takeadoro-backend/functions/node_modules
+[warn] ⚠  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host. 
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2025-04-13T23:22:58.428Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-04-13T23:22:58.433Z] Found firebase-functions binary at '/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8197
+
+[debug] [2025-04-13T23:23:00.690Z] Got response from /__/functions.yaml {"endpoints":{"httpCreateDeposit":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"httpCreateDeposit"},"pawaPayCallback":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"pawaPayCallback"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[info] ✔  functions: Loaded functions definitions from source: httpCreateDeposit, pawaPayCallback. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: httpCreateDeposit, pawaPayCallback."}}
+[info] ✔  functions[us-central1-httpCreateDeposit]: http function initialized (http://127.0.0.1:5001/takeadoro/us-central1/httpCreateDeposit). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/takeadoro/us-central1/httpCreateDeposit)."}}
+[info] ✔  functions[us-central1-pawaPayCallback]: http function initialized (http://127.0.0.1:5001/takeadoro/us-central1/pawaPayCallback). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/takeadoro/us-central1/pawaPayCallback)."}}
+[debug] [2025-04-13T23:23:04.727Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: . If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌───────────┬────────────────┬─────────────────────────────────┐
+│ Emulator  │ Host:Port      │ View in Emulator UI             │
+├───────────┼────────────────┼─────────────────────────────────┤
+│ Functions │ 127.0.0.1:5001 │ http://127.0.0.1:4000/functions │
+└───────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub host: 127.0.0.1 port: 4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2025-04-13T23:25:21.188Z] [work-queue] {"queuedWork":["/takeadoro/us-central1/httpCreateDeposit-2025-04-13T23:25:21.188Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2025-04-13T23:25:21.190Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/takeadoro/us-central1/httpCreateDeposit-2025-04-13T23:25:21.188Z"],"workRunningCount":1}
+[debug] [2025-04-13T23:25:21.190Z] Accepted request POST /takeadoro/us-central1/httpCreateDeposit --> us-central1-httpCreateDeposit
+[debug] [2025-04-13T23:25:21.193Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2025-04-13T23:25:21.195Z] [functions] Got req.url=/takeadoro/us-central1/httpCreateDeposit, mapping to path=/ {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/takeadoro/us-central1/httpCreateDeposit, mapping to path=/"}}
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2025-04-13T23:25:21.211Z] [worker-pool] addWorker(us-central1-httpCreateDeposit) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(us-central1-httpCreateDeposit)"}}
+[debug] [2025-04-13T23:25:21.212Z] [worker-pool] Adding worker with key us-central1-httpCreateDeposit, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key us-central1-httpCreateDeposit, total=1"}}
+[debug] [2025-04-13T23:25:22.126Z] [runtime-status] [7122] Resolved module firebase-admin {"declared":true,"installed":true,"version":"12.7.0","resolution":"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"[runtime-status] [7122] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"12.7.0\",\"resolution\":\"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2025-04-13T23:25:22.128Z] [runtime-status] [7122] Resolved module firebase-functions {"declared":true,"installed":true,"version":"6.3.2","resolution":"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-functions/lib/v2/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"[runtime-status] [7122] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"6.3.2\",\"resolution\":\"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}"}}
+[debug] [2025-04-13T23:25:22.130Z] [runtime-status] [7122] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}] {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"[runtime-status] [7122] Outgoing network have been stubbed. [{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"net\",\"status\":\"mocked\"}]"}}
+[debug] [2025-04-13T23:25:22.130Z] [runtime-status] [7122] Resolved module firebase-functions {"declared":true,"installed":true,"version":"6.3.2","resolution":"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-functions/lib/v2/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"[runtime-status] [7122] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"6.3.2\",\"resolution\":\"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}"}}
+[debug] [2025-04-13T23:25:22.337Z] [runtime-status] [7122] Checked functions.config() {"config":{}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"[runtime-status] [7122] Checked functions.config() {\"config\":{}}"}}
+[debug] [2025-04-13T23:25:22.338Z] [runtime-status] [7122] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"6.3.2","resolution":"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-functions/lib/v2/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"[runtime-status] [7122] firebase-functions has been stubbed. {\"functionsResolution\":{\"declared\":true,\"installed\":true,\"version\":\"6.3.2\",\"resolution\":\"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}}"}}
+[debug] [2025-04-13T23:25:22.338Z] [runtime-status] [7122] Resolved module firebase-functions {"declared":true,"installed":true,"version":"6.3.2","resolution":"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-functions/lib/v2/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"[runtime-status] [7122] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"6.3.2\",\"resolution\":\"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}"}}
+[debug] [2025-04-13T23:25:22.339Z] [runtime-status] [7122] Resolved module firebase-admin {"declared":true,"installed":true,"version":"12.7.0","resolution":"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"[runtime-status] [7122] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"12.7.0\",\"resolution\":\"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2025-04-13T23:25:22.340Z] [runtime-status] [7122] Resolved module firebase-functions {"declared":true,"installed":true,"version":"6.3.2","resolution":"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-functions/lib/v2/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"[runtime-status] [7122] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"6.3.2\",\"resolution\":\"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}"}}
+[debug] [2025-04-13T23:25:22.341Z] [runtime-status] [7122] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"12.7.0","resolution":"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-admin/lib/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"[runtime-status] [7122] firebase-admin has been stubbed. {\"adminResolution\":{\"declared\":true,\"installed\":true,\"version\":\"12.7.0\",\"resolution\":\"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-admin/lib/index.js\"}}"}}
+[debug] [2025-04-13T23:25:22.349Z] [runtime-status] [7122] initializeApp(DEFAULT) {"credential":{"implicit":true,"refreshToken":{"clientId":"563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com","clientSecret":"j9iVZfS8kkCEFUPaAeJV0sAi","refreshToken":"1//03jLeG3QDjLBLCgYIARAAGAMSNwF-L9IrcaEoO_fXLJSK_0qrjKKwoDsOJMO7IKhKpShm6pIcgsX1KFL2WdJg9f2uPJcitX01Pj0","type":"authorized_user"},"httpClient":{"retry":{"maxRetries":4,"statusCodes":[503],"ioErrorCodes":["ECONNRESET","ETIMEDOUT"],"backOffFactor":0.5,"maxDelayInMillis":60000}}},"databaseURL":"https://<your-database-name>.firebaseio.com"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"[runtime-status] [7122] initializeApp(DEFAULT) {\"credential\":{\"implicit\":true,\"refreshToken\":{\"clientId\":\"563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com\",\"clientSecret\":\"j9iVZfS8kkCEFUPaAeJV0sAi\",\"refreshToken\":\"1//03jLeG3QDjLBLCgYIARAAGAMSNwF-L9IrcaEoO_fXLJSK_0qrjKKwoDsOJMO7IKhKpShm6pIcgsX1KFL2WdJg9f2uPJcitX01Pj0\",\"type\":\"authorized_user\"},\"httpClient\":{\"retry\":{\"maxRetries\":4,\"statusCodes\":[503],\"ioErrorCodes\":[\"ECONNRESET\",\"ETIMEDOUT\"],\"backOffFactor\":0.5,\"maxDelayInMillis\":60000}}},\"databaseURL\":\"https://<your-database-name>.firebaseio.com\"}"}}
+[warn] ⚠  functions: The Cloud Firestore emulator is not running, so calls to Firestore will affect production. {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"The Cloud Firestore emulator is not running, so calls to Firestore will affect production."}}
+[debug] [2025-04-13T23:25:22.357Z] [runtime-status] [7122] Functions runtime initialized. {"cwd":"/Users/macbookpro/Projets/takeadoro-backend/functions","node_version":"22.14.0"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"[runtime-status] [7122] Functions runtime initialized. {\"cwd\":\"/Users/macbookpro/Projets/takeadoro-backend/functions\",\"node_version\":\"22.14.0\"}"}}
+[debug] [2025-04-13T23:25:22.357Z] [runtime-status] [7122] Listening to port: /var/folders/b_/4ng5ksrx5zd137tjgcjc94j80000gn/T/fire_emu_8f602e9ccab7122f.sock {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"[runtime-status] [7122] Listening to port: /var/folders/b_/4ng5ksrx5zd137tjgcjc94j80000gn/T/fire_emu_8f602e9ccab7122f.sock"}}
+[debug] [2025-04-13T23:25:22.440Z] [worker-us-central1-httpCreateDeposit-7c9373c6-cf48-4662-af80-329245422bd0]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"[worker-us-central1-httpCreateDeposit-7c9373c6-cf48-4662-af80-329245422bd0]: IDLE"}}
+[debug] [2025-04-13T23:25:22.441Z] [worker-pool] submitRequest(triggerId=us-central1-httpCreateDeposit) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-httpCreateDeposit)"}}
+[info] i  functions: Beginning execution of "us-central1-httpCreateDeposit" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"Beginning execution of \"us-central1-httpCreateDeposit\""}}
+[debug] [2025-04-13T23:25:22.442Z] [worker-us-central1-httpCreateDeposit-7c9373c6-cf48-4662-af80-329245422bd0]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"[worker-us-central1-httpCreateDeposit-7c9373c6-cf48-4662-af80-329245422bd0]: BUSY"}}
+[info] >  Deposit initiated successfully: { {"user":"Deposit initiated successfully: {","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"\u001b[90m> \u001b[39m Deposit initiated successfully: {"}}
+[info] >    depositId: 'a1a9e199-54bc-4a4b-b936-de70cc6c129e', {"user":"  depositId: 'a1a9e199-54bc-4a4b-b936-de70cc6c129e',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"\u001b[90m> \u001b[39m   depositId: 'a1a9e199-54bc-4a4b-b936-de70cc6c129e',"}}
+[info] >    status: 'ACCEPTED', {"user":"  status: 'ACCEPTED',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"\u001b[90m> \u001b[39m   status: 'ACCEPTED',"}}
+[info] >    created: '2025-04-13T23:25:22Z' {"user":"  created: '2025-04-13T23:25:22Z'","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"\u001b[90m> \u001b[39m   created: '2025-04-13T23:25:22Z'"}}
+[info] >  } {"user":"}","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"\u001b[90m> \u001b[39m }"}}
+[debug] [2025-04-13T23:25:22.656Z] Finishing up request with event=pause {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"Finishing up request with event=pause"}}
+[info] i  functions: Finished "us-central1-httpCreateDeposit" in 214.858959ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"Finished \"us-central1-httpCreateDeposit\" in 214.858959ms"}}
+[debug] [2025-04-13T23:25:22.657Z] [worker-us-central1-httpCreateDeposit-7c9373c6-cf48-4662-af80-329245422bd0]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"[worker-us-central1-httpCreateDeposit-7c9373c6-cf48-4662-af80-329245422bd0]: IDLE"}}
+[debug] [2025-04-13T23:25:22.657Z] Finishing up request with event=finish {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"Finishing up request with event=finish"}}
+[debug] [2025-04-13T23:25:22.657Z] Finishing up request with event=close {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"Finishing up request with event=close"}}
+[debug] [2025-04-13T23:25:22.657Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[debug] [2025-04-13T23:26:15.057Z] [work-queue] {"queuedWork":["/takeadoro/us-central1/pawaPayCallback-2025-04-13T23:26:15.057Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2025-04-13T23:26:15.064Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/takeadoro/us-central1/pawaPayCallback-2025-04-13T23:26:15.057Z"],"workRunningCount":1}
+[debug] [2025-04-13T23:26:15.064Z] Accepted request POST /takeadoro/us-central1/pawaPayCallback --> us-central1-pawaPayCallback
+[debug] [2025-04-13T23:26:15.067Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2025-04-13T23:26:15.067Z] [functions] Got req.url=/takeadoro/us-central1/pawaPayCallback, mapping to path=/ {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/takeadoro/us-central1/pawaPayCallback, mapping to path=/"}}
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2025-04-13T23:26:15.081Z] [worker-pool] addWorker(us-central1-pawaPayCallback) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(us-central1-pawaPayCallback)"}}
+[debug] [2025-04-13T23:26:15.081Z] [worker-pool] Adding worker with key us-central1-pawaPayCallback, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key us-central1-pawaPayCallback, total=1"}}
+[debug] [2025-04-13T23:26:15.973Z] [runtime-status] [7264] Resolved module firebase-admin {"declared":true,"installed":true,"version":"12.7.0","resolution":"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"[runtime-status] [7264] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"12.7.0\",\"resolution\":\"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2025-04-13T23:26:15.973Z] [runtime-status] [7264] Resolved module firebase-functions {"declared":true,"installed":true,"version":"6.3.2","resolution":"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-functions/lib/v2/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"[runtime-status] [7264] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"6.3.2\",\"resolution\":\"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}"}}
+[debug] [2025-04-13T23:26:15.973Z] [runtime-status] [7264] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}] {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"[runtime-status] [7264] Outgoing network have been stubbed. [{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"net\",\"status\":\"mocked\"}]"}}
+[debug] [2025-04-13T23:26:15.974Z] [runtime-status] [7264] Resolved module firebase-functions {"declared":true,"installed":true,"version":"6.3.2","resolution":"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-functions/lib/v2/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"[runtime-status] [7264] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"6.3.2\",\"resolution\":\"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}"}}
+[debug] [2025-04-13T23:26:16.194Z] [runtime-status] [7264] Checked functions.config() {"config":{}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"[runtime-status] [7264] Checked functions.config() {\"config\":{}}"}}
+[debug] [2025-04-13T23:26:16.194Z] [runtime-status] [7264] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"6.3.2","resolution":"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-functions/lib/v2/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"[runtime-status] [7264] firebase-functions has been stubbed. {\"functionsResolution\":{\"declared\":true,\"installed\":true,\"version\":\"6.3.2\",\"resolution\":\"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}}"}}
+[debug] [2025-04-13T23:26:16.194Z] [runtime-status] [7264] Resolved module firebase-functions {"declared":true,"installed":true,"version":"6.3.2","resolution":"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-functions/lib/v2/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"[runtime-status] [7264] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"6.3.2\",\"resolution\":\"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}"}}
+[debug] [2025-04-13T23:26:16.195Z] [runtime-status] [7264] Resolved module firebase-admin {"declared":true,"installed":true,"version":"12.7.0","resolution":"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"[runtime-status] [7264] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"12.7.0\",\"resolution\":\"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2025-04-13T23:26:16.197Z] [runtime-status] [7264] Resolved module firebase-functions {"declared":true,"installed":true,"version":"6.3.2","resolution":"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-functions/lib/v2/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"[runtime-status] [7264] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"6.3.2\",\"resolution\":\"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-functions/lib/v2/index.js\"}"}}
+[debug] [2025-04-13T23:26:16.197Z] [runtime-status] [7264] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"12.7.0","resolution":"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-admin/lib/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"[runtime-status] [7264] firebase-admin has been stubbed. {\"adminResolution\":{\"declared\":true,\"installed\":true,\"version\":\"12.7.0\",\"resolution\":\"/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/firebase-admin/lib/index.js\"}}"}}
+[debug] [2025-04-13T23:26:16.204Z] [runtime-status] [7264] initializeApp(DEFAULT) {"credential":{"implicit":true,"refreshToken":{"clientId":"563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com","clientSecret":"j9iVZfS8kkCEFUPaAeJV0sAi","refreshToken":"1//03jLeG3QDjLBLCgYIARAAGAMSNwF-L9IrcaEoO_fXLJSK_0qrjKKwoDsOJMO7IKhKpShm6pIcgsX1KFL2WdJg9f2uPJcitX01Pj0","type":"authorized_user"},"httpClient":{"retry":{"maxRetries":4,"statusCodes":[503],"ioErrorCodes":["ECONNRESET","ETIMEDOUT"],"backOffFactor":0.5,"maxDelayInMillis":60000}}},"databaseURL":"https://<your-database-name>.firebaseio.com"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"[runtime-status] [7264] initializeApp(DEFAULT) {\"credential\":{\"implicit\":true,\"refreshToken\":{\"clientId\":\"563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com\",\"clientSecret\":\"j9iVZfS8kkCEFUPaAeJV0sAi\",\"refreshToken\":\"1//03jLeG3QDjLBLCgYIARAAGAMSNwF-L9IrcaEoO_fXLJSK_0qrjKKwoDsOJMO7IKhKpShm6pIcgsX1KFL2WdJg9f2uPJcitX01Pj0\",\"type\":\"authorized_user\"},\"httpClient\":{\"retry\":{\"maxRetries\":4,\"statusCodes\":[503],\"ioErrorCodes\":[\"ECONNRESET\",\"ETIMEDOUT\"],\"backOffFactor\":0.5,\"maxDelayInMillis\":60000}}},\"databaseURL\":\"https://<your-database-name>.firebaseio.com\"}"}}
+[debug] [2025-04-13T23:26:16.212Z] [runtime-status] [7264] Functions runtime initialized. {"cwd":"/Users/macbookpro/Projets/takeadoro-backend/functions","node_version":"22.14.0"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"[runtime-status] [7264] Functions runtime initialized. {\"cwd\":\"/Users/macbookpro/Projets/takeadoro-backend/functions\",\"node_version\":\"22.14.0\"}"}}
+[debug] [2025-04-13T23:26:16.212Z] [runtime-status] [7264] Listening to port: /var/folders/b_/4ng5ksrx5zd137tjgcjc94j80000gn/T/fire_emu_0c9b2b14c7ebf09e.sock {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"[runtime-status] [7264] Listening to port: /var/folders/b_/4ng5ksrx5zd137tjgcjc94j80000gn/T/fire_emu_0c9b2b14c7ebf09e.sock"}}
+[debug] [2025-04-13T23:26:16.310Z] [worker-us-central1-pawaPayCallback-900edb7f-bebe-490c-be7d-84b7352b024c]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"[worker-us-central1-pawaPayCallback-900edb7f-bebe-490c-be7d-84b7352b024c]: IDLE"}}
+[debug] [2025-04-13T23:26:16.311Z] [worker-pool] submitRequest(triggerId=us-central1-pawaPayCallback) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-pawaPayCallback)"}}
+[info] i  functions: Beginning execution of "us-central1-pawaPayCallback" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"Beginning execution of \"us-central1-pawaPayCallback\""}}
+[debug] [2025-04-13T23:26:16.311Z] [worker-us-central1-pawaPayCallback-900edb7f-bebe-490c-be7d-84b7352b024c]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"[worker-us-central1-pawaPayCallback-900edb7f-bebe-490c-be7d-84b7352b024c]: BUSY"}}
+[info] >  Callback reçu : { {"user":"Callback reçu : {","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m Callback reçu : {"}}
+[info] >    correspondent: 'ORANGE_SEN', {"user":"  correspondent: 'ORANGE_SEN',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   correspondent: 'ORANGE_SEN',"}}
+[info] >    correspondentIds: { financialTransactionId: '78a03cb0-7dab-47e2-b8bb-20c64a2b2b90' }, {"user":"  correspondentIds: { financialTransactionId: '78a03cb0-7dab-47e2-b8bb-20c64a2b2b90' },","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   correspondentIds: { financialTransactionId: '78a03cb0-7dab-47e2-b8bb-20c64a2b2b90' },"}}
+[info] >    country: 'SEN', {"user":"  country: 'SEN',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   country: 'SEN',"}}
+[info] >    created: '2025-04-13T23:25:22Z', {"user":"  created: '2025-04-13T23:25:22Z',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   created: '2025-04-13T23:25:22Z',"}}
+[info] >    currency: 'XOF', {"user":"  currency: 'XOF',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   currency: 'XOF',"}}
+[info] >    customerTimestamp: '2025-04-13T23:25:22Z', {"user":"  customerTimestamp: '2025-04-13T23:25:22Z',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   customerTimestamp: '2025-04-13T23:25:22Z',"}}
+[info] >    depositId: 'a1a9e199-54bc-4a4b-b936-de70cc6c129e', {"user":"  depositId: 'a1a9e199-54bc-4a4b-b936-de70cc6c129e',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   depositId: 'a1a9e199-54bc-4a4b-b936-de70cc6c129e',"}}
+[info] >    depositedAmount: '1000.0000', {"user":"  depositedAmount: '1000.0000',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   depositedAmount: '1000.0000',"}}
+[info] >    metadata: { {"user":"  metadata: {","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   metadata: {"}}
+[info] >      destinationPhone: '242055555555', {"user":"    destinationPhone: '242055555555',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m     destinationPhone: '242055555555',"}}
+[info] >      destinationCorrespondent: 'AIRTEL_COG', {"user":"    destinationCorrespondent: 'AIRTEL_COG',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m     destinationCorrespondent: 'AIRTEL_COG',"}}
+[info] >      destinationCountry: 'COG' {"user":"    destinationCountry: 'COG'","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m     destinationCountry: 'COG'"}}
+[info] >    }, {"user":"  },","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   },"}}
+[info] >    payer: { address: { value: '221770000000' }, type: 'MSISDN' }, {"user":"  payer: { address: { value: '221770000000' }, type: 'MSISDN' },","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   payer: { address: { value: '221770000000' }, type: 'MSISDN' },"}}
+[info] >    requestedAmount: '1000.0000', {"user":"  requestedAmount: '1000.0000',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   requestedAmount: '1000.0000',"}}
+[info] >    statementDescription: 'Transfert', {"user":"  statementDescription: 'Transfert',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   statementDescription: 'Transfert',"}}
+[info] >    status: 'COMPLETED' {"user":"  status: 'COMPLETED'","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   status: 'COMPLETED'"}}
+[info] >  } {"user":"}","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m }"}}
+[info] >  Deposit status checked successfully: [ {"user":"Deposit status checked successfully: [","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m Deposit status checked successfully: ["}}
+[info] >    { {"user":"  {","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   {"}}
+[info] >      depositId: 'a1a9e199-54bc-4a4b-b936-de70cc6c129e', {"user":"    depositId: 'a1a9e199-54bc-4a4b-b936-de70cc6c129e',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m     depositId: 'a1a9e199-54bc-4a4b-b936-de70cc6c129e',"}}
+[info] >      status: 'COMPLETED', {"user":"    status: 'COMPLETED',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m     status: 'COMPLETED',"}}
+[info] >      requestedAmount: '1000', {"user":"    requestedAmount: '1000',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m     requestedAmount: '1000',"}}
+[info] >      depositedAmount: '1000', {"user":"    depositedAmount: '1000',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m     depositedAmount: '1000',"}}
+[info] >      currency: 'XOF', {"user":"    currency: 'XOF',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m     currency: 'XOF',"}}
+[info] >      country: 'SEN', {"user":"    country: 'SEN',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m     country: 'SEN',"}}
+[info] >      correspondent: 'ORANGE_SEN', {"user":"    correspondent: 'ORANGE_SEN',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m     correspondent: 'ORANGE_SEN',"}}
+[info] >      payer: { type: 'MSISDN', address: [Object] }, {"user":"    payer: { type: 'MSISDN', address: [Object] },","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m     payer: { type: 'MSISDN', address: [Object] },"}}
+[info] >      customerTimestamp: '2025-04-13T23:25:22Z', {"user":"    customerTimestamp: '2025-04-13T23:25:22Z',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m     customerTimestamp: '2025-04-13T23:25:22Z',"}}
+[info] >      statementDescription: 'Transfert', {"user":"    statementDescription: 'Transfert',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m     statementDescription: 'Transfert',"}}
+[info] >      created: '2025-04-13T23:25:22Z', {"user":"    created: '2025-04-13T23:25:22Z',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m     created: '2025-04-13T23:25:22Z',"}}
+[info] >      correspondentIds: { financialTransactionId: '78a03cb0-7dab-47e2-b8bb-20c64a2b2b90' }, {"user":"    correspondentIds: { financialTransactionId: '78a03cb0-7dab-47e2-b8bb-20c64a2b2b90' },","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m     correspondentIds: { financialTransactionId: '78a03cb0-7dab-47e2-b8bb-20c64a2b2b90' },"}}
+[info] >      metadata: { {"user":"    metadata: {","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m     metadata: {"}}
+[info] >        destinationPhone: '242055555555', {"user":"      destinationPhone: '242055555555',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m       destinationPhone: '242055555555',"}}
+[info] >        destinationCorrespondent: 'AIRTEL_COG', {"user":"      destinationCorrespondent: 'AIRTEL_COG',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m       destinationCorrespondent: 'AIRTEL_COG',"}}
+[info] >        destinationCountry: 'COG' {"user":"      destinationCountry: 'COG'","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m       destinationCountry: 'COG'"}}
+[info] >      } {"user":"    }","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m     }"}}
+[info] >    } {"user":"  }","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   }"}}
+[info] >  ] {"user":"]","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m ]"}}
+[info] >  Le paiement a été confirmé avec succès. { {"user":"Le paiement a été confirmé avec succès. {","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m Le paiement a été confirmé avec succès. {"}}
+[info] >    success: true, {"user":"  success: true,","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   success: true,"}}
+[info] >    data: [ {"user":"  data: [","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   data: ["}}
+[info] >      { {"user":"    {","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m     {"}}
+[info] >        depositId: 'a1a9e199-54bc-4a4b-b936-de70cc6c129e', {"user":"      depositId: 'a1a9e199-54bc-4a4b-b936-de70cc6c129e',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m       depositId: 'a1a9e199-54bc-4a4b-b936-de70cc6c129e',"}}
+[info] >        status: 'COMPLETED', {"user":"      status: 'COMPLETED',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m       status: 'COMPLETED',"}}
+[info] >        requestedAmount: '1000', {"user":"      requestedAmount: '1000',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m       requestedAmount: '1000',"}}
+[info] >        depositedAmount: '1000', {"user":"      depositedAmount: '1000',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m       depositedAmount: '1000',"}}
+[info] >        currency: 'XOF', {"user":"      currency: 'XOF',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m       currency: 'XOF',"}}
+[info] >        country: 'SEN', {"user":"      country: 'SEN',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m       country: 'SEN',"}}
+[info] >        correspondent: 'ORANGE_SEN', {"user":"      correspondent: 'ORANGE_SEN',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m       correspondent: 'ORANGE_SEN',"}}
+[info] >        payer: [Object], {"user":"      payer: [Object],","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m       payer: [Object],"}}
+[info] >        customerTimestamp: '2025-04-13T23:25:22Z', {"user":"      customerTimestamp: '2025-04-13T23:25:22Z',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m       customerTimestamp: '2025-04-13T23:25:22Z',"}}
+[info] >        statementDescription: 'Transfert', {"user":"      statementDescription: 'Transfert',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m       statementDescription: 'Transfert',"}}
+[info] >        created: '2025-04-13T23:25:22Z', {"user":"      created: '2025-04-13T23:25:22Z',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m       created: '2025-04-13T23:25:22Z',"}}
+[info] >        correspondentIds: [Object], {"user":"      correspondentIds: [Object],","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m       correspondentIds: [Object],"}}
+[info] >        metadata: [Object] {"user":"      metadata: [Object]","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m       metadata: [Object]"}}
+[info] >      } {"user":"    }","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m     }"}}
+[info] >    ] {"user":"  ]","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   ]"}}
+[info] >  } {"user":"}","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m }"}}
+[info] >  Received deposit callback: { {"user":"Received deposit callback: {","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m Received deposit callback: {"}}
+[info] >    correspondent: 'ORANGE_SEN', {"user":"  correspondent: 'ORANGE_SEN',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   correspondent: 'ORANGE_SEN',"}}
+[info] >    correspondentIds: { financialTransactionId: '78a03cb0-7dab-47e2-b8bb-20c64a2b2b90' }, {"user":"  correspondentIds: { financialTransactionId: '78a03cb0-7dab-47e2-b8bb-20c64a2b2b90' },","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   correspondentIds: { financialTransactionId: '78a03cb0-7dab-47e2-b8bb-20c64a2b2b90' },"}}
+[info] >    country: 'SEN', {"user":"  country: 'SEN',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   country: 'SEN',"}}
+[info] >    created: '2025-04-13T23:25:22Z', {"user":"  created: '2025-04-13T23:25:22Z',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   created: '2025-04-13T23:25:22Z',"}}
+[info] >    currency: 'XOF', {"user":"  currency: 'XOF',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   currency: 'XOF',"}}
+[info] >    customerTimestamp: '2025-04-13T23:25:22Z', {"user":"  customerTimestamp: '2025-04-13T23:25:22Z',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   customerTimestamp: '2025-04-13T23:25:22Z',"}}
+[info] >    depositId: 'a1a9e199-54bc-4a4b-b936-de70cc6c129e', {"user":"  depositId: 'a1a9e199-54bc-4a4b-b936-de70cc6c129e',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   depositId: 'a1a9e199-54bc-4a4b-b936-de70cc6c129e',"}}
+[info] >    depositedAmount: '1000.0000', {"user":"  depositedAmount: '1000.0000',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   depositedAmount: '1000.0000',"}}
+[info] >    metadata: { {"user":"  metadata: {","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   metadata: {"}}
+[info] >      destinationPhone: '242055555555', {"user":"    destinationPhone: '242055555555',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m     destinationPhone: '242055555555',"}}
+[info] >      destinationCorrespondent: 'AIRTEL_COG', {"user":"    destinationCorrespondent: 'AIRTEL_COG',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m     destinationCorrespondent: 'AIRTEL_COG',"}}
+[info] >      destinationCountry: 'COG' {"user":"    destinationCountry: 'COG'","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m     destinationCountry: 'COG'"}}
+[info] >    }, {"user":"  },","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   },"}}
+[info] >    payer: { address: { value: '221770000000' }, type: 'MSISDN' }, {"user":"  payer: { address: { value: '221770000000' }, type: 'MSISDN' },","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   payer: { address: { value: '221770000000' }, type: 'MSISDN' },"}}
+[info] >    requestedAmount: '1000.0000', {"user":"  requestedAmount: '1000.0000',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   requestedAmount: '1000.0000',"}}
+[info] >    statementDescription: 'Transfert', {"user":"  statementDescription: 'Transfert',","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   statementDescription: 'Transfert',"}}
+[info] >    status: 'COMPLETED' {"user":"  status: 'COMPLETED'","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   status: 'COMPLETED'"}}
+[info] >  } {"user":"}","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m }"}}
+[info] >  Deposit a1a9e199-54bc-4a4b-b936-de70cc6c129e confirmed. Initiating payout... {"user":"Deposit a1a9e199-54bc-4a4b-b936-de70cc6c129e confirmed. Initiating payout...","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m Deposit a1a9e199-54bc-4a4b-b936-de70cc6c129e confirmed. Initiating payout..."}}
+[warn] ⚠  Google API requested!
+   - URL: "https://oauth2.googleapis.com/token"
+   - Be careful, this may be a production service. {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"Google API requested!\n   - URL: \"https://oauth2.googleapis.com/token\"\n   - Be careful, this may be a production service."}}
+[info] >  Transaction enregistrée avec succès : mLtXE4zgEmodulTq3vHg {"user":"Transaction enregistrée avec succès : mLtXE4zgEmodulTq3vHg","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m Transaction enregistrée avec succès : mLtXE4zgEmodulTq3vHg"}}
+[info] >  Balance======= { {"user":"Balance======= {","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m Balance======= {"}}
+[info] >    balances: [ { country: 'COG', balance: '24400', currency: 'XAF', mno: '' } ] {"user":"  balances: [ { country: 'COG', balance: '24400', currency: 'XAF', mno: '' } ]","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m   balances: [ { country: 'COG', balance: '24400', currency: 'XAF', mno: '' } ]"}}
+[info] >  } {"user":"}","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m }"}}
+[info] >  Payout échoué, remboursement en cours... {"user":"Payout échoué, remboursement en cours...","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m Payout échoué, remboursement en cours..."}}
+[info] >  Échec de l'initiation du payout: Payout échoué, remboursement initié. {"user":"Échec de l'initiation du payout: Payout échoué, remboursement initié.","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m Échec de l'initiation du payout: Payout échoué, remboursement initié."}}
+[info] >  Refund enregistré avec succès : sKMHOl6bhbv2DsqyiwZa {"user":"Refund enregistré avec succès : sKMHOl6bhbv2DsqyiwZa","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"\u001b[90m> \u001b[39m Refund enregistré avec succès : sKMHOl6bhbv2DsqyiwZa"}}
+[debug] [2025-04-13T23:26:17.278Z] Finishing up request with event=pause {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"Finishing up request with event=pause"}}
+[info] i  functions: Finished "us-central1-pawaPayCallback" in 967.523458ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"Finished \"us-central1-pawaPayCallback\" in 967.523458ms"}}
+[debug] [2025-04-13T23:26:17.279Z] [worker-us-central1-pawaPayCallback-900edb7f-bebe-490c-be7d-84b7352b024c]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"[worker-us-central1-pawaPayCallback-900edb7f-bebe-490c-be7d-84b7352b024c]: IDLE"}}
+[debug] [2025-04-13T23:26:17.279Z] Finishing up request with event=finish {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"Finishing up request with event=finish"}}
+[debug] [2025-04-13T23:26:17.279Z] Finishing up request with event=close {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"Finishing up request with event=close"}}
+[debug] [2025-04-13T23:26:17.279Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[debug] [2025-04-13T23:31:05.369Z] File /Users/macbookpro/Projets/takeadoro-backend/functions/src/api/pawapay/payouts/payoutService.ts changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/macbookpro/Projets/takeadoro-backend/functions/src/api/pawapay/payouts/payoutService.ts changed, reloading triggers"}}
+[debug] [2025-04-13T23:31:06.372Z] Validating nodejs source
+[debug] [2025-04-13T23:31:11.415Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^6.3.2",
+    "node-fetch": "^3.3.2",
+    "sib-api-v3-sdk": "^8.5.0",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "firebase-functions-test": "^3.1.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2025-04-13T23:31:11.415Z] Building nodejs source
+[debug] [2025-04-13T23:31:11.416Z] Failed to find version of module node: reached end of search path /Users/macbookpro/Projets/takeadoro-backend/functions/node_modules
+[warn] ⚠  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host. 
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2025-04-13T23:31:11.418Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-04-13T23:31:11.421Z] Found firebase-functions binary at '/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8281
+
+[debug] [2025-04-13T23:31:14.319Z] Got response from /__/functions.yaml {"endpoints":{"httpCreateDeposit":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"httpCreateDeposit"},"pawaPayCallback":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"pawaPayCallback"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[info] ✔  functions: Loaded functions definitions from source: httpCreateDeposit, pawaPayCallback. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: httpCreateDeposit, pawaPayCallback."}}
+[debug] [2025-04-13T23:31:18.344Z] [worker-pool] Shutting down IDLE worker (us-central1-httpCreateDeposit) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Shutting down IDLE worker (us-central1-httpCreateDeposit)"}}
+[debug] [2025-04-13T23:31:18.344Z] [worker-us-central1-httpCreateDeposit-7c9373c6-cf48-4662-af80-329245422bd0]: FINISHING {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"[worker-us-central1-httpCreateDeposit-7c9373c6-cf48-4662-af80-329245422bd0]: FINISHING"}}
+[debug] [2025-04-13T23:31:18.344Z] [worker-pool] Shutting down IDLE worker (us-central1-pawaPayCallback) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Shutting down IDLE worker (us-central1-pawaPayCallback)"}}
+[debug] [2025-04-13T23:31:18.344Z] [worker-us-central1-pawaPayCallback-900edb7f-bebe-490c-be7d-84b7352b024c]: FINISHING {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"[worker-us-central1-pawaPayCallback-900edb7f-bebe-490c-be7d-84b7352b024c]: FINISHING"}}
+[debug] [2025-04-13T23:31:18.354Z] [worker-us-central1-httpCreateDeposit-7c9373c6-cf48-4662-af80-329245422bd0]: exited {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"[worker-us-central1-httpCreateDeposit-7c9373c6-cf48-4662-af80-329245422bd0]: exited"}}
+[debug] [2025-04-13T23:31:18.354Z] [worker-us-central1-httpCreateDeposit-7c9373c6-cf48-4662-af80-329245422bd0]: FINISHED {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-httpCreateDeposit"},"extension":{},"message":"[worker-us-central1-httpCreateDeposit-7c9373c6-cf48-4662-af80-329245422bd0]: FINISHED"}}
+[debug] [2025-04-13T23:31:18.356Z] [worker-us-central1-pawaPayCallback-900edb7f-bebe-490c-be7d-84b7352b024c]: exited {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"[worker-us-central1-pawaPayCallback-900edb7f-bebe-490c-be7d-84b7352b024c]: exited"}}
+[debug] [2025-04-13T23:31:18.356Z] [worker-us-central1-pawaPayCallback-900edb7f-bebe-490c-be7d-84b7352b024c]: FINISHED {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pawaPayCallback"},"extension":{},"message":"[worker-us-central1-pawaPayCallback-900edb7f-bebe-490c-be7d-84b7352b024c]: FINISHED"}}
+[debug] [2025-04-13T23:31:31.560Z] File /Users/macbookpro/Projets/takeadoro-backend/functions/src/api/pawapay/payouts/payoutService.ts changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/macbookpro/Projets/takeadoro-backend/functions/src/api/pawapay/payouts/payoutService.ts changed, reloading triggers"}}
+[debug] [2025-04-13T23:31:32.562Z] Validating nodejs source
+[debug] [2025-04-13T23:31:37.363Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^6.3.2",
+    "node-fetch": "^3.3.2",
+    "sib-api-v3-sdk": "^8.5.0",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "firebase-functions-test": "^3.1.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2025-04-13T23:31:37.364Z] Building nodejs source
+[debug] [2025-04-13T23:31:37.364Z] Failed to find version of module node: reached end of search path /Users/macbookpro/Projets/takeadoro-backend/functions/node_modules
+[warn] ⚠  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host. 
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2025-04-13T23:31:37.366Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-04-13T23:31:37.368Z] Found firebase-functions binary at '/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8974
+
+[debug] [2025-04-13T23:31:39.823Z] Got response from /__/functions.yaml {"endpoints":{"httpCreateDeposit":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"httpCreateDeposit"},"pawaPayCallback":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"pawaPayCallback"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[info] ✔  functions: Loaded functions definitions from source: httpCreateDeposit, pawaPayCallback. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: httpCreateDeposit, pawaPayCallback."}}
+[debug] [2025-04-13T23:31:52.087Z] File /Users/macbookpro/Projets/takeadoro-backend/functions/src/api/pawapay/payouts/payoutService.ts changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/macbookpro/Projets/takeadoro-backend/functions/src/api/pawapay/payouts/payoutService.ts changed, reloading triggers"}}
+[debug] [2025-04-13T23:31:53.089Z] Validating nodejs source
+[debug] [2025-04-13T23:31:57.701Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^6.3.2",
+    "node-fetch": "^3.3.2",
+    "sib-api-v3-sdk": "^8.5.0",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "firebase-functions-test": "^3.1.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2025-04-13T23:31:57.701Z] Building nodejs source
+[debug] [2025-04-13T23:31:57.701Z] Failed to find version of module node: reached end of search path /Users/macbookpro/Projets/takeadoro-backend/functions/node_modules
+[warn] ⚠  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host. 
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2025-04-13T23:31:57.704Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-04-13T23:31:57.705Z] Found firebase-functions binary at '/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/.bin/firebase-functions'
+[debug] [2025-04-13T23:31:57.708Z] File /Users/macbookpro/Projets/takeadoro-backend/functions/src/api/pawapay/payouts/payoutService.ts changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/macbookpro/Projets/takeadoro-backend/functions/src/api/pawapay/payouts/payoutService.ts changed, reloading triggers"}}
+[debug] [2025-04-13T23:31:58.717Z] Validating nodejs source
+[debug] [2025-04-13T23:32:03.828Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^6.3.2",
+    "node-fetch": "^3.3.2",
+    "sib-api-v3-sdk": "^8.5.0",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "firebase-functions-test": "^3.1.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2025-04-13T23:32:03.828Z] Building nodejs source
+[debug] [2025-04-13T23:32:03.828Z] Failed to find version of module node: reached end of search path /Users/macbookpro/Projets/takeadoro-backend/functions/node_modules
+[warn] ⚠  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host. 
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2025-04-13T23:32:03.830Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-04-13T23:32:03.832Z] Found firebase-functions binary at '/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8920
+
+[debug] [2025-04-13T23:32:04.059Z] Got response from /__/functions.yaml {"endpoints":{"httpCreateDeposit":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"httpCreateDeposit"},"pawaPayCallback":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"pawaPayCallback"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[debug] [2025-04-13T23:32:04.634Z] File /Users/macbookpro/Projets/takeadoro-backend/functions/src/api/pawapay/payouts/payoutService.ts changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/macbookpro/Projets/takeadoro-backend/functions/src/api/pawapay/payouts/payoutService.ts changed, reloading triggers"}}
+[debug] [2025-04-13T23:32:05.635Z] Validating nodejs source
+[debug] [2025-04-13T23:32:10.757Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^6.3.2",
+    "node-fetch": "^3.3.2",
+    "sib-api-v3-sdk": "^8.5.0",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "firebase-functions-test": "^3.1.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2025-04-13T23:32:10.757Z] Building nodejs source
+[debug] [2025-04-13T23:32:10.757Z] Failed to find version of module node: reached end of search path /Users/macbookpro/Projets/takeadoro-backend/functions/node_modules
+[warn] ⚠  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host. 
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2025-04-13T23:32:10.765Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-04-13T23:32:10.766Z] Found firebase-functions binary at '/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8492
+
+[info] ✔  functions: Loaded functions definitions from source: httpCreateDeposit, pawaPayCallback. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: httpCreateDeposit, pawaPayCallback."}}
+[debug] [2025-04-13T23:32:10.838Z] File /Users/macbookpro/Projets/takeadoro-backend/functions/src/api/pawapay/payouts/payoutService.ts changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/macbookpro/Projets/takeadoro-backend/functions/src/api/pawapay/payouts/payoutService.ts changed, reloading triggers"}}
+[debug] [2025-04-13T23:32:10.917Z] Got response from /__/functions.yaml {"endpoints":{"httpCreateDeposit":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"httpCreateDeposit"},"pawaPayCallback":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"pawaPayCallback"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[debug] [2025-04-13T23:32:11.844Z] Validating nodejs source
+[debug] [2025-04-13T23:32:16.705Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^6.3.2",
+    "node-fetch": "^3.3.2",
+    "sib-api-v3-sdk": "^8.5.0",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "firebase-functions-test": "^3.1.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2025-04-13T23:32:16.705Z] Building nodejs source
+[debug] [2025-04-13T23:32:16.705Z] Failed to find version of module node: reached end of search path /Users/macbookpro/Projets/takeadoro-backend/functions/node_modules
+[warn] ⚠  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host. 
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2025-04-13T23:32:16.713Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-04-13T23:32:16.717Z] Found firebase-functions binary at '/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8297
+
+[info] ✔  functions: Loaded functions definitions from source: httpCreateDeposit, pawaPayCallback. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: httpCreateDeposit, pawaPayCallback."}}
+[debug] [2025-04-13T23:32:16.848Z] Got response from /__/functions.yaml {"endpoints":{"httpCreateDeposit":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"httpCreateDeposit"},"pawaPayCallback":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"pawaPayCallback"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[debug] [2025-04-13T23:32:18.513Z] File /Users/macbookpro/Projets/takeadoro-backend/functions/src/api/pawapay/payouts/payoutService.ts changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/macbookpro/Projets/takeadoro-backend/functions/src/api/pawapay/payouts/payoutService.ts changed, reloading triggers"}}
+[info] Serving at port 8875
+
+[debug] [2025-04-13T23:32:18.988Z] Got response from /__/functions.yaml {"endpoints":{"httpCreateDeposit":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"httpCreateDeposit"},"pawaPayCallback":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"pawaPayCallback"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[debug] [2025-04-13T23:32:19.515Z] Validating nodejs source
+[debug] [2025-04-13T23:32:24.518Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^6.3.2",
+    "node-fetch": "^3.3.2",
+    "sib-api-v3-sdk": "^8.5.0",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "firebase-functions-test": "^3.1.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2025-04-13T23:32:24.518Z] Building nodejs source
+[debug] [2025-04-13T23:32:24.518Z] Failed to find version of module node: reached end of search path /Users/macbookpro/Projets/takeadoro-backend/functions/node_modules
+[warn] ⚠  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host. 
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2025-04-13T23:32:24.524Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-04-13T23:32:24.527Z] Found firebase-functions binary at '/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/.bin/firebase-functions'
+[info] ✔  functions: Loaded functions definitions from source: httpCreateDeposit, pawaPayCallback. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: httpCreateDeposit, pawaPayCallback."}}
+[info] ✔  functions: Loaded functions definitions from source: httpCreateDeposit, pawaPayCallback. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: httpCreateDeposit, pawaPayCallback."}}
+[debug] [2025-04-13T23:32:24.724Z] File /Users/macbookpro/Projets/takeadoro-backend/functions/src/api/pawapay/payouts/payoutService.ts changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/macbookpro/Projets/takeadoro-backend/functions/src/api/pawapay/payouts/payoutService.ts changed, reloading triggers"}}
+[debug] [2025-04-13T23:32:25.725Z] Validating nodejs source
+[debug] [2025-04-13T23:32:30.433Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^6.3.2",
+    "node-fetch": "^3.3.2",
+    "sib-api-v3-sdk": "^8.5.0",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "firebase-functions-test": "^3.1.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2025-04-13T23:32:30.433Z] Building nodejs source
+[debug] [2025-04-13T23:32:30.433Z] Failed to find version of module node: reached end of search path /Users/macbookpro/Projets/takeadoro-backend/functions/node_modules
+[warn] ⚠  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host. 
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2025-04-13T23:32:30.437Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-04-13T23:32:30.438Z] Found firebase-functions binary at '/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8133
+
+[debug] [2025-04-13T23:32:30.662Z] Got response from /__/functions.yaml {"endpoints":{"httpCreateDeposit":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"httpCreateDeposit"},"pawaPayCallback":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"pawaPayCallback"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[info] Serving at port 8292
+
+[debug] [2025-04-13T23:32:33.437Z] Got response from /__/functions.yaml {"endpoints":{"httpCreateDeposit":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"httpCreateDeposit"},"pawaPayCallback":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"pawaPayCallback"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[debug] [2025-04-13T23:32:33.862Z] File /Users/macbookpro/Projets/takeadoro-backend/functions/src/api/pawapay/payouts/payoutService.ts changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/macbookpro/Projets/takeadoro-backend/functions/src/api/pawapay/payouts/payoutService.ts changed, reloading triggers"}}
+[info] ✔  functions: Loaded functions definitions from source: httpCreateDeposit, pawaPayCallback. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: httpCreateDeposit, pawaPayCallback."}}
+[debug] [2025-04-13T23:32:34.864Z] Validating nodejs source
+[debug] [2025-04-13T23:32:39.455Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^6.3.2",
+    "node-fetch": "^3.3.2",
+    "sib-api-v3-sdk": "^8.5.0",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "firebase-functions-test": "^3.1.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2025-04-13T23:32:39.456Z] Building nodejs source
+[debug] [2025-04-13T23:32:39.456Z] Failed to find version of module node: reached end of search path /Users/macbookpro/Projets/takeadoro-backend/functions/node_modules
+[warn] ⚠  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host. 
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2025-04-13T23:32:39.464Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-04-13T23:32:39.465Z] Found firebase-functions binary at '/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/.bin/firebase-functions'
+[debug] [2025-04-13T23:32:39.467Z] File /Users/macbookpro/Projets/takeadoro-backend/functions/src/api/pawapay/payouts/payoutService.ts changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/macbookpro/Projets/takeadoro-backend/functions/src/api/pawapay/payouts/payoutService.ts changed, reloading triggers"}}
+[info] ✔  functions: Loaded functions definitions from source: httpCreateDeposit, pawaPayCallback. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: httpCreateDeposit, pawaPayCallback."}}
+[debug] [2025-04-13T23:32:40.469Z] Validating nodejs source
+[debug] [2025-04-13T23:32:45.874Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^6.3.2",
+    "node-fetch": "^3.3.2",
+    "sib-api-v3-sdk": "^8.5.0",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "firebase-functions-test": "^3.1.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2025-04-13T23:32:45.874Z] Building nodejs source
+[debug] [2025-04-13T23:32:45.875Z] Failed to find version of module node: reached end of search path /Users/macbookpro/Projets/takeadoro-backend/functions/node_modules
+[warn] ⚠  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host. 
+[info] i  functions: Loaded environment variables from .env. 
+[info] Serving at port 8168
+
+[debug] [2025-04-13T23:32:45.877Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-04-13T23:32:45.878Z] Found firebase-functions binary at '/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/.bin/firebase-functions'
+[debug] [2025-04-13T23:32:46.117Z] Got response from /__/functions.yaml {"endpoints":{"httpCreateDeposit":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"httpCreateDeposit"},"pawaPayCallback":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"pawaPayCallback"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}

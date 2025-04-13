@@ -21,7 +21,7 @@ export async function checkBalance() {
 
 
 export async function checkBalanceByCountry(country: string) {
-    const apiUrl = `${setupPawapay.baseUrl}/wallet-balances/${country}`;
+    const apiUrl = `${setupPawapay.baseUrl}/v1/wallet-balances/${country}`;
   
     try {
       const response = await fetch(apiUrl, {
@@ -32,6 +32,7 @@ export async function checkBalanceByCountry(country: string) {
         },
       });
       const data = await response.json();
+      console.log("Balance=======", data)
       return data.balances?.[0]?.balance ? parseFloat(data.balances[0].balance) : 0;
     } catch (error) {
       console.error("Error checking balance:", error);

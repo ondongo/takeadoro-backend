@@ -1,25 +1,24 @@
 import { v4 as uuidv4 } from "uuid";
 import setupPawapay from "../../../config/pawapay-config/setup";
-import { Country } from "../../../enum/country";
 import { checkBalanceByCountry } from "../wallet-balances/checkBalanceService";
 
 export async function createPayout(
-  amount: string,
+  depositedAmount: string,
   currency: string,
-  correspondent: string,
-  recipientPhone: string,
+  destinationCorrespondent: string,
+  destinationPhone: string,
+  destinationCountry: string,
   country: string,
-  countryOrigin: string,
-  correspondentOrigin: string,
-  phoneOrigin: string
+  correspondent: string,
+  payerPhone: string
 ) {
-  const balance = await checkBalanceByCountry(country);
+  const balance = await checkBalanceByCountry(destinationCountry);
 
   if (balance === null) {
     return { success: false, message: "Impossible de vérifier le solde." };
   }
 
-  if (Number(amount) > balance) {
+  if (Number(depositedAmount) > balance) {
     return {
       success: false,
       message: "Solde insuffisant pour effectuer ce payout.",
@@ -30,20 +29,20 @@ export async function createPayout(
 
   const payload = {
     payoutId: uuidv4(),
-    amount: amount.toString(),
+    amount: depositedAmount.toString(),
     currency,
-    correspondent,
+    destinationCorrespondent,
     recipient: {
-      address: { value: recipientPhone },
+      address: { value: destinationPhone },
       type: "MSISDN",
     },
     customerTimestamp: new Date().toISOString(),
     statementDescription: "Payout",
-    country,
+    destinationCountry,
     metadata: [
-      { fieldName: "countryOrigin", fieldValue: countryOrigin },
-      { fieldName: "correspondentOrigin", fieldValue: correspondentOrigin },
-      { fieldName: "phoneOrigin", fieldValue: phoneOrigin },
+      { fieldName: "countryOrigin", fieldValue: country },
+      { fieldName: "correspondentOrigin", fieldValue: correspondent },
+      { fieldName: "phoneOrigin", fieldValue: payerPhone },
     ],
   };
 
@@ -57,7 +56,8 @@ export async function createPayout(
       body: JSON.stringify(payload),
     });
     const data = await response.json();
-
+    console.log(">>>>>>>>>>>>>>Data Payout", data);
+    console.log(">>>>>>>>>>>>, Response Payout", response);
     if (!response.ok) {
       console.error("Payout échoué, remboursement en cours...");
 

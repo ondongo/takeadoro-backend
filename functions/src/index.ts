@@ -70,14 +70,17 @@ export const httpCreateDeposit = onRequest(async (req: any, res: any) => {
   }
 });
 
-export const pawaPayCallback = onRequest(async (req, res) => {
-  try {
-    await handlePawaPayCallback(req, res);
-  } catch (err) {
-    console.error("Error in pawaPayCallback:", err);
-    res.status(500).send("Internal server error");
+export const pawaPayCallback = onRequest(
+  async (req, res) => {
+    try {
+      await handlePawaPayCallback(req, res);
+    } catch (err) {
+      console.error("❌ Error in pawaPayCallback:", err);
+      res.status(500).send("Internal server error");
+    }
   }
-});
+);
+
 /* export const cashInOrange = onRequest(async (req: any, res: any) => {
   try {
     const { partnerMsisdn, amount, customerMsisdn } = req.body;

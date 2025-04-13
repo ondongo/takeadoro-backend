@@ -15,15 +15,9 @@ export async function HandlerDepositFailed(
   customerPhone?: string
 ) {
   try {
-    console.warn(
-      `Deposit ${depositId || "unknown"} failed with status: ${
-        status || "unknown"
-      }`
-    );
-
     // Enregistrer l'échec de transaction dans Firestore
     const failedRef = await db.collection("Deposits").add({
-      depositId,
+      depositId: depositId || "",
       amount,
       currency,
       status: "failed",
