@@ -74,10 +74,10 @@ export async function HandlerDepositSucceeded(data: any) {
       correspondent,
       payerPhone
     );
-
+    const amountPayout = Math.floor(Number(depositedAmount)).toString();
     if (payoutResponse.success && payoutResponse.data.status === "ACCEPTED") {
       console.log("Payout initié avec succès:", payoutResponse.data);
-      const amountPayout = Math.floor(Number(depositedAmount)).toString();
+
       // Enregistrer le payout en Firestore
       const payoutRef = await db.collection("Payouts").add({
         payoutId: payoutResponse.data.payoutId,
@@ -98,8 +98,24 @@ export async function HandlerDepositSucceeded(data: any) {
       console.log("Payout enregistré avec succès :", payoutRef.id);
       return { status: 200, message: "Payout initiated successfully" };
     } else {
-      console.error("Échec de l'initiation du payout:", payoutResponse.message);
-
+      //console.error("Échec de l'initiation du payout:", payoutResponse.message);
+      await db.collection("Payouts").add({
+        payoutId: payoutResponse.data.payoutId,
+        amountPayout,
+        recipientCurrency: currency === "XOF" ? "XAF" : "XOF",
+        recipientPhone: destinationPhone,
+        recipientCountry: destinationCountry,
+        recipientCorrespodent: destinationCorrespondent,
+        status: "failed",
+        createdAt: new Date(),
+        depositId,
+        currencyOrigin: currency,
+        phoneOrigin: payerPhone,
+        countryOrigin: country,
+        correspondentOrigin: correspondent,
+        errorMessage: payoutResponse?.message || "Erreur inconnue",
+      });
+      
       // Gestion des erreurs, commencer le processus de remboursement
       await createRefund(depositId, depositedAmount, payerPhone);
       return {
