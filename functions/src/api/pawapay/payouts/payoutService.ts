@@ -13,12 +13,13 @@ export async function createPayout(
   payerPhone: string
 ) {
   const balance = await checkBalanceByCountry(destinationCountry);
+  const amountToSend = Math.floor(Number(depositedAmount) - (Number(depositedAmount) * 0.09)).toFixed(0);
 
   if (balance === null) {
     return { success: false, message: "Impossible de vérifier le solde." };
   }
 
-  if (Number(depositedAmount) > balance) {
+  if (Number(amountToSend) > balance) {
     return {
       success: false,
       message: "Solde insuffisant pour effectuer ce payout.",
@@ -26,12 +27,12 @@ export async function createPayout(
   }
 
   const apiUrl = `${setupPawapay.baseUrl}/payouts`;
-
+  const amountPayout = Number(amountToSend).toString();
   const payload = {
     payoutId: uuidv4(),
-    amount: depositedAmount.toString(),
+    amount: amountPayout,
     currency,
-    destinationCorrespondent,
+    correspondent: destinationCorrespondent,
     recipient: {
       address: { value: destinationPhone },
       type: "MSISDN",
@@ -56,7 +57,7 @@ export async function createPayout(
       body: JSON.stringify(payload),
     });
     const data = await response.json();
-    console.log(">>>>>>>>>>>>>>Data Payout", data);
+    console.log(">>>>>>>>>>>>Data Payout", data);
     console.log(">>>>>>>>>>>>, Response Payout", response);
     if (!response.ok) {
       console.error("Payout échoué, remboursement en cours...");

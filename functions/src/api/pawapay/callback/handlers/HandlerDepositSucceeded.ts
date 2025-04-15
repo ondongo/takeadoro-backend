@@ -45,9 +45,10 @@ export async function HandlerDepositSucceeded(data: any) {
     }
 
     // Enregistrer la transaction réussie dans Firestore
+    const amountFloor = Math.floor(Number(depositedAmount)).toString();
     const paymentRef = await db.collection("Deposits").add({
       depositId,
-      depositedAmount,
+      depositedAmount: amountFloor,
       currencyOrigin: currency,
       countryOrigin: country,
       correspondentOrigin: correspondent,
@@ -76,11 +77,11 @@ export async function HandlerDepositSucceeded(data: any) {
 
     if (payoutResponse.success && payoutResponse.data.status === "ACCEPTED") {
       console.log("Payout initié avec succès:", payoutResponse.data);
-
+      const amountPayout = Math.floor(Number(depositedAmount)).toString();
       // Enregistrer le payout en Firestore
       const payoutRef = await db.collection("Payouts").add({
         payoutId: payoutResponse.data.payoutId,
-        depositedAmount,
+        amountPayout,
         recipientCurrency: currency === "XOF" ? "XAF" : "XOF",
         recipientPhone: destinationPhone,
         recipientCountry: destinationCountry,

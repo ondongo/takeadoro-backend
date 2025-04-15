@@ -14,10 +14,12 @@ export async function createRefund(
 ) {
   const apiUrl = `${setupPawapay.baseUrl}/refunds`;
   const refundId = uuidv4();
+  const amountFloor = Math.floor(Number(amount)).toFixed(0).toString();
+  console.log(">>>>>>>, Voici le amountFloor",amountFloor);
   const payload = {
     refundId,
     depositId,
-    amount: amount.toString(),
+    amount: amountFloor,
     metadata: [
       { fieldName: "payerPhone", fieldValue: payerPhone, isPII: true },
     ],
@@ -28,7 +30,7 @@ export async function createRefund(
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.PAWAPAY_TOKEN_SANDBOX}`,
+        Authorization: `Bearer ${process.env.PAWAPAY_TOKEN_SANDBOX}`,
       },
       body: JSON.stringify(payload),
     });
@@ -39,7 +41,7 @@ export async function createRefund(
     const refundRef = await db.collection("Refunds").add({
       refundId,
       depositId,
-      amount,
+      amount: amountFloor,
       payerPhone,
       status: data?.status || "PENDING",
       response: data,
