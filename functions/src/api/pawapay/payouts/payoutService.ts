@@ -13,7 +13,7 @@ export async function createPayout(
   payerPhone: string
 ) {
   const balance = await checkBalanceByCountry(destinationCountry);
-  const amountToSend = Math.floor(Number(depositedAmount) - (Number(depositedAmount) * 0.09)).toFixed(0);
+  const amountToSend = Math.floor(Number(depositedAmount) - (Number(depositedAmount) * 0.09) - 100).toFixed(0);
 
   if (balance === null) {
     return { success: false, message: "Impossible de vérifier le solde." };
