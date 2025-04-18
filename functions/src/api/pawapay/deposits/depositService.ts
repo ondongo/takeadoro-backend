@@ -1,5 +1,11 @@
 import setupPawapay from "../../../config/pawapay-config/setup";
+import admin from "../../../config/firebaseConfig";
 import { v4 as uuidv4 } from "uuid";
+if (admin.apps.length === 0) {
+  admin.initializeApp();
+}
+
+const db = admin.firestore();
 
 export async function createDeposit(
   amount: number,
@@ -9,7 +15,7 @@ export async function createDeposit(
   destinationCountry: string,
   correspondent: string,
   destinationPhone: string,
-  destinationCorrespondent:string
+  destinationCorrespondent: string
 ) {
   const apiUrl = `${setupPawapay.baseUrl}/deposits`;
 
@@ -28,7 +34,10 @@ export async function createDeposit(
     metadata: [
       { fieldName: "destinationCountry", fieldValue: destinationCountry },
       { fieldName: "destinationPhone", fieldValue: destinationPhone },
-      { fieldName: "destinationCorrespondent", fieldValue: destinationCorrespondent },
+      {
+        fieldName: "destinationCorrespondent",
+        fieldValue: destinationCorrespondent,
+      },
     ],
   };
 
@@ -43,11 +52,44 @@ export async function createDeposit(
     });
 
     const data = await response.json();
-    if (response.status === 200) {
+    if (data.status === "ACCEPTED") {
       console.log("Deposit initiated successfully:", data);
+      // Enregistrer la transaction réussie dans Firestore
+      const amountFloor = Math.floor(Number(amount)).toString();
+      const paymentRef = await db.collection("Deposits").add({
+        depositId: data.depositId,
+        depositedAmount: amountFloor,
+        currencyOrigin: currency,
+        countryOrigin: payerCountry,
+        correspondentOrigin: correspondent,
+        phoneOrigin: payerPhone,
+        destinationCurrency: currency === "XOF" ? "XAF" : "XOF",
+        destinationPhone,
+        destinationCountry,
+        destinationCorrespondent,
+        status: "succeeded",
+        createdAt: new Date(),
+      });
+
+      console.log("Transaction enregistrée avec succès :", paymentRef.id);
       return { success: true, data };
     } else {
       console.error("Error initiating deposit:", data);
+      const amountFloor = Math.floor(Number(amount)).toString();
+      const paymentfailedRef = await db.collection("Deposits").add({
+        depositId: data.depositId,
+        depositedAmount: amountFloor,
+        currencyOrigin: currency,
+        countryOrigin: payerCountry,
+        correspondentOrigin: correspondent,
+        phoneOrigin: payerPhone,
+        destinationCurrency: currency === "XOF" ? "XAF" : "XOF",
+        destinationPhone,
+        destinationCountry,
+        destinationCorrespondent,
+        status: "failed",
+        createdAt: new Date(),
+      });
       return { success: false, error: data };
     }
   } catch (error: any) {
