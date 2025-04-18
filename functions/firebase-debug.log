@@ -1,14 +1,91 @@
-[debug] [2025-04-18T05:18:09.338Z] ----------------------------------------------------------------------
-[debug] [2025-04-18T05:18:09.340Z] Command:       /Users/macbookpro/.nvm/versions/node/v22.14.0/bin/node /Users/macbookpro/.nvm/versions/node/v22.14.0/bin/firebase emulators:start --only functions
-[debug] [2025-04-18T05:18:09.340Z] CLI Version:   14.1.0
-[debug] [2025-04-18T05:18:09.341Z] Platform:      darwin
-[debug] [2025-04-18T05:18:09.341Z] Node Version:  v22.14.0
-[debug] [2025-04-18T05:18:09.341Z] Time:          Fri Apr 18 2025 07:18:09 GMT+0200 (heure d’été d’Europe centrale)
-[debug] [2025-04-18T05:18:09.341Z] ----------------------------------------------------------------------
+[debug] [2025-04-18T06:14:16.917Z] ----------------------------------------------------------------------
+[debug] [2025-04-18T06:14:16.920Z] Command:       /Users/macbookpro/.nvm/versions/node/v22.14.0/bin/node /Users/macbookpro/.nvm/versions/node/v22.14.0/bin/firebase emulators:start --only functions
+[debug] [2025-04-18T06:14:16.920Z] CLI Version:   14.1.0
+[debug] [2025-04-18T06:14:16.920Z] Platform:      darwin
+[debug] [2025-04-18T06:14:16.920Z] Node Version:  v22.14.0
+[debug] [2025-04-18T06:14:16.921Z] Time:          Fri Apr 18 2025 08:14:16 GMT+0200 (heure d’été d’Europe centrale)
+[debug] [2025-04-18T06:14:16.921Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2025-04-18T05:18:09.494Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2025-04-18T05:18:09.495Z] > authorizing via signed-in user (prince.ondongo@ism.edu.sn)
+[debug] [2025-04-18T06:14:17.157Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-04-18T06:14:17.158Z] > authorizing via signed-in user (prince.ondongo@ism.edu.sn)
 [info] i  emulators: Starting emulators: functions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions"}}
-[debug] [2025-04-18T05:18:12.776Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2025-04-18T05:18:12.776Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}]},"metadata":{"message":"assigned listening specs for emulators"}}
-[debug] [2025-04-18T05:18:12.779Z] [hub] writing locator at /var/folders/b_/4ng5ksrx5zd137tjgcjc94j80000gn/T/hub-takeadoro.json
+[debug] [2025-04-18T06:14:22.712Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-04-18T06:14:22.712Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2025-04-18T06:14:22.717Z] [hub] writing locator at /var/folders/b_/4ng5ksrx5zd137tjgcjc94j80000gn/T/hub-takeadoro.json
+[debug] [2025-04-18T06:14:28.704Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-04-18T06:14:28.704Z] [eventarc] Eventarc Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-04-18T06:14:28.704Z] [tasks] Cloud Tasks Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-04-18T06:14:28.704Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5001}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}],"tasks":[{"address":"127.0.0.1","family":"IPv4","port":9499}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
+[warn] ⚠  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: apphosting, auth, firestore, database, hosting, pubsub, storage, dataconnect {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mapphosting, auth, firestore, database, hosting, pubsub, storage, dataconnect\u001b[22m"}}
+[debug] [2025-04-18T06:14:28.718Z] defaultcredentials: writing to file /Users/macbookpro/.config/firebase/prince_ondongo_ism.edu.sn_application_default_credentials.json
+[debug] [2025-04-18T06:14:28.721Z] Setting GAC to /Users/macbookpro/.config/firebase/prince_ondongo_ism.edu.sn_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /Users/macbookpro/.config/firebase/prince_ondongo_ism.edu.sn_application_default_credentials.json"}}
+[debug] [2025-04-18T06:14:28.721Z] Checked if tokens are valid: false, expires at: 1744957095505
+[debug] [2025-04-18T06:14:28.721Z] Checked if tokens are valid: false, expires at: 1744957095505
+[debug] [2025-04-18T06:14:28.722Z] > refreshing access token with scopes: []
+[debug] [2025-04-18T06:14:28.723Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-04-18T06:14:28.723Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-04-18T06:14:28.812Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-04-18T06:14:28.812Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-04-18T06:14:28.822Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/takeadoro/adminSdkConfig [none]
+[debug] [2025-04-18T06:14:29.329Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/takeadoro/adminSdkConfig 200
+[debug] [2025-04-18T06:14:29.330Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/takeadoro/adminSdkConfig {"projectId":"takeadoro","storageBucket":"takeadoro.appspot.com","locationId":"europe-west"}
+[info] i  functions: Watching "/Users/macbookpro/Projets/takeadoro-backend/functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/Users/macbookpro/Projets/takeadoro-backend/functions\" for Cloud Functions..."}}
+[debug] [2025-04-18T06:14:29.353Z] Validating nodejs source
+[debug] [2025-04-18T06:14:33.268Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^6.3.2",
+    "node-fetch": "^3.3.2",
+    "sib-api-v3-sdk": "^8.5.0",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "firebase-functions-test": "^3.1.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2025-04-18T06:14:33.268Z] Building nodejs source
+[debug] [2025-04-18T06:14:33.269Z] Failed to find version of module node: reached end of search path /Users/macbookpro/Projets/takeadoro-backend/functions/node_modules
+[warn] ⚠  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host. 
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2025-04-18T06:14:33.276Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-04-18T06:14:33.285Z] Found firebase-functions binary at '/Users/macbookpro/Projets/takeadoro-backend/functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8921
+
+[debug] [2025-04-18T06:14:35.671Z] Got response from /__/functions.yaml {"endpoints":{"httpCreateDeposit":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"httpCreateDeposit"},"pawaPayCallback":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"pawaPayCallback"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[info] ✔  functions: Loaded functions definitions from source: httpCreateDeposit, pawaPayCallback. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: httpCreateDeposit, pawaPayCallback."}}
+[info] ✔  functions[us-central1-httpCreateDeposit]: http function initialized (http://127.0.0.1:5001/takeadoro/us-central1/httpCreateDeposit). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/takeadoro/us-central1/httpCreateDeposit)."}}
+[info] ✔  functions[us-central1-pawaPayCallback]: http function initialized (http://127.0.0.1:5001/takeadoro/us-central1/pawaPayCallback). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/takeadoro/us-central1/pawaPayCallback)."}}
+[debug] [2025-04-18T06:14:39.711Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: . If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌───────────┬────────────────┬─────────────────────────────────┐
+│ Emulator  │ Host:Port      │ View in Emulator UI             │
+├───────────┼────────────────┼─────────────────────────────────┤
+│ Functions │ 127.0.0.1:5001 │ http://127.0.0.1:4000/functions │
+└───────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub host: 127.0.0.1 port: 4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 

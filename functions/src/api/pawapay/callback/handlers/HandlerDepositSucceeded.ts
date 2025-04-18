@@ -56,7 +56,7 @@ export async function HandlerDepositSucceeded(data: any) {
       payerPhone
     );
     const amountPayout = Math.floor(
-      Number(depositedAmount) - Number(depositedAmount) * 0.09 - 100
+      (Number(depositedAmount) - 100) / (1 + 0.09)
     ).toFixed(0);
 
     if (payoutResponse.success && payoutResponse.data.status === "ACCEPTED") {
