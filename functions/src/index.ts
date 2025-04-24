@@ -34,6 +34,7 @@ export const httpCreateDeposit = onRequest(async (req: any, res: any) => {
       destinationCountry,
       destinationPhone,
       destinationCorrespondent,
+      userId
     } = req.body;
 
     if (
@@ -44,7 +45,8 @@ export const httpCreateDeposit = onRequest(async (req: any, res: any) => {
       !destinationCountry ||
       !correspondent ||
       !destinationPhone ||
-      !destinationCorrespondent
+      !destinationCorrespondent ||
+      !userId
     ) {
       return res.status(400).json({
         error: true,
@@ -60,7 +62,8 @@ export const httpCreateDeposit = onRequest(async (req: any, res: any) => {
       destinationCountry,
       correspondent,
       destinationPhone,
-      destinationCorrespondent
+      destinationCorrespondent,
+      userId
     );
 
     res.status(response.success ? 200 : 500).json(response);

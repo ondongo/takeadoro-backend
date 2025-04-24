@@ -15,7 +15,8 @@ export async function createDeposit(
   destinationCountry: string,
   correspondent: string,
   destinationPhone: string,
-  destinationCorrespondent: string
+  destinationCorrespondent: string,
+  userId: string
 ) {
   const apiUrl = `${setupPawapay.baseUrl}/deposits`;
 
@@ -38,6 +39,7 @@ export async function createDeposit(
         fieldName: "destinationCorrespondent",
         fieldValue: destinationCorrespondent,
       },
+      { fieldName: "userId", fieldValue: userId },
     ],
   };
 
@@ -69,6 +71,7 @@ export async function createDeposit(
         destinationCorrespondent,
         status: "succeeded",
         createdAt: new Date(),
+        userId: userId ?? "",
       });
 
       console.log("Transaction enregistrée avec succès :", paymentRef.id);
@@ -89,6 +92,7 @@ export async function createDeposit(
         destinationCorrespondent,
         status: "failed",
         createdAt: new Date(),
+        userId: userId ?? "",
       });
       return { success: false, error: data };
     }

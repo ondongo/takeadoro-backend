@@ -10,7 +10,8 @@ export async function createPayout(
   destinationCountry: string,
   country: string,
   correspondent: string,
-  payerPhone: string
+  payerPhone: string,
+  userId: string
 ) {
   const balance = await checkBalanceByCountry(destinationCountry);
   const amountToSend = Math.floor(
@@ -46,6 +47,7 @@ export async function createPayout(
       { fieldName: "countryOrigin", fieldValue: country },
       { fieldName: "correspondentOrigin", fieldValue: correspondent },
       { fieldName: "phoneOrigin", fieldValue: payerPhone },
+      { fieldName: "userId", fieldValue: userId },
     ],
   };
 

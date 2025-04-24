@@ -1,6 +1,7 @@
 import { createPayout } from "../../payouts/payoutService";
 import admin from "../../../../config/firebaseConfig";
 import { createRefund } from "../../refunds/refundService";
+import { sendPushNotification } from "../../../sms/sendPushNotification";
 
 if (admin.apps.length === 0) {
   admin.initializeApp();
@@ -44,6 +45,12 @@ export async function HandlerDepositSucceeded(data: any) {
       return { status: 400, message: "Missing destination correspondent " };
     }
 
+    const userId = metadata.userId;
+    if (!userId) {
+      console.error("No  userId found in metadata!");
+      return { status: 400, message: "Missing destination userId " };
+    }
+
     // Tentative d'initiation du payout
     const payoutResponse = await createPayout(
       depositedAmount,
@@ -53,11 +60,20 @@ export async function HandlerDepositSucceeded(data: any) {
       destinationCountry,
       country,
       correspondent,
-      payerPhone
+      payerPhone,
+      userId
     );
     const amountPayout = Math.floor(
       (Number(depositedAmount) - 100) / (1 + 0.09)
     ).toFixed(0);
+    const fees = Math.floor(
+      Number(
+        (
+          Number(depositedAmount) -
+          Math.floor((Number(depositedAmount) - 100) / (1 + 0.09))
+        ).toFixed(0)
+      )
+    ).toString();
 
     if (payoutResponse.success && payoutResponse.data.status === "ACCEPTED") {
       console.log("Payout initié avec succès:", payoutResponse.data);
@@ -77,7 +93,11 @@ export async function HandlerDepositSucceeded(data: any) {
         phoneOrigin: payerPhone,
         countryOrigin: country,
         correspondentOrigin: correspondent,
+        userId: userId ?? "",
       });
+
+     
+      await sendPushNotification(userId, destinationCountry, fees, "success");
 
       console.log("Payout enregistré avec succès :", payoutRef.id);
       return { status: 200, message: "Payout initiated successfully" };
@@ -98,10 +118,12 @@ export async function HandlerDepositSucceeded(data: any) {
         countryOrigin: country,
         correspondentOrigin: correspondent,
         errorMessage: payoutResponse?.message || "Erreur inconnue",
+        userId: userId ?? "",
       });
 
       // Gestion des erreurs, commencer le processus de remboursement
-      await createRefund(depositId, depositedAmount, payerPhone);
+      await createRefund(depositId, depositedAmount, payerPhone, userId);
+      await sendPushNotification(userId, destinationCountry, fees, "failed");
       return {
         status: 500,
         message: "Payout initiation failed, refund initiated",
